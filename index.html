@@ -27,31 +27,17 @@
   --radius: 16px;
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background: var(--bg-main);
-  color: var(--text-main);
-  min-height: 100vh;
-  line-height: 1.5;
+  font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main);
+  color: var(--text-main); min-height: 100vh; line-height: 1.5;
   background-image:
     radial-gradient(circle at 15% 20%, rgba(79, 140, 255, 0.12), transparent 40%),
     radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.12), transparent 40%);
   background-attachment: fixed;
 }
-
 .container { max-width: 1100px; margin: 0 auto; padding: 20px 16px 60px; }
-
-.glass {
-  background: var(--bg-panel);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--border-glass);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
+.glass { background: var(--bg-panel); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--border-glass); border-radius: var(--radius); box-shadow: var(--shadow); }
 
 /* HEADER */
 header { display: flex; align-items: center; gap: 14px; padding: 20px 24px; margin-bottom: 20px; }
@@ -77,7 +63,7 @@ button:active { transform: scale(0.97); }
 #settings-toggle { display: flex; align-items: center; gap: 8px; }
 .chevron { transition: transform 0.3s ease; }
 .chevron.open { transform: rotate(180deg); }
-#settings-body { display: grid; gap: 18px; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; max-height: 1500px; opacity: 1; }
+#settings-body { display: grid; gap: 18px; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; max-height: 1800px; opacity: 1; }
 #settings-body.collapsed { max-height: 0; opacity: 0; margin-top: -18px; }
 .field { display: grid; gap: 6px; }
 .field label { font-size: 13px; font-weight: 600; color: var(--text-dim); }
@@ -112,11 +98,15 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border: none;
 .mic-btn { width: 110px; height: 110px; border-radius: 50%; background: var(--accent-grad); font-size: 44px; display: grid; place-items: center; margin: 10px auto 20px; box-shadow: 0 8px 30px rgba(79, 140, 255, 0.4); position: relative; }
 .mic-btn.recording { background: linear-gradient(135deg, #ff3b3b, #ff0055); animation: pulse 1.4s infinite; }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.6); } 70% { box-shadow: 0 0 0 24px rgba(255, 59, 59, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 59, 59, 0); } }
-.waveform { display: none; justify-content: center; align-items: center; gap: 5px; height: 44px; margin-bottom: 14px; }
+.waveform { display: none; justify-content: center; align-items: flex-end; gap: 5px; height: 44px; margin-bottom: 14px; }
 .waveform.active { display: flex; }
 .waveform .bar { width: 6px; border-radius: 3px; background: var(--accent-grad); animation: wave 1s ease-in-out infinite; }
 .waveform .bar:nth-child(1){animation-delay:0s;} .waveform .bar:nth-child(2){animation-delay:.2s;} .waveform .bar:nth-child(3){animation-delay:.4s;} .waveform .bar:nth-child(4){animation-delay:.6s;} .waveform .bar:nth-child(5){animation-delay:.8s;}
 @keyframes wave { 0%,100%{height:12px;} 50%{height:40px;} }
+/* Thanh hiển thị mức âm lượng thực (VAD) */
+.vu-meter { width: 220px; max-width: 80%; height: 8px; margin: 0 auto 14px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; display: none; }
+.vu-meter.active { display: block; }
+.vu-fill { height: 100%; width: 0%; background: var(--accent-grad); border-radius: 4px; transition: width 0.08s linear; }
 .status-bar { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: rgba(0,0,0,0.3); border-radius: 30px; font-size: 14px; font-weight: 600; color: var(--text-dim); min-height: 40px; }
 .mode-note { font-size: 12px; color: var(--text-dim); margin-top: 10px; }
 
@@ -140,10 +130,10 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border: none;
 .entry-btn:hover { background: rgba(79,140,255,0.28); }
 .entry-btn.edit { background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.3); color: var(--warning); }
 .entry-btn.copy { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.3); color: var(--success); }
+.entry-btn.del { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.3); color: var(--danger); }
 .entry-text { font-size: 14px; line-height: 1.5; word-break: break-word; }
-/* Textarea khi sửa inline */
 .entry-edit-area { width: 100%; background: rgba(0,0,0,0.35); border: 1px solid var(--accent-1); border-radius: 8px; color: var(--text-main); font-family: inherit; font-size: 14px; padding: 8px; resize: vertical; min-height: 56px; outline: none; }
-.edit-actions { display: flex; gap: 6px; margin-top: 6px; }
+.edit-actions { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
 .empty-hint { color: var(--text-dim); font-size: 13px; text-align: center; margin: auto; padding: 40px 10px; }
 
 /* TTS */
@@ -164,90 +154,27 @@ footer { text-align: center; font-size: 12px; color: var(--text-dim); padding: 2
 footer a { color: var(--accent-1); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 
-/* ============================================================
-   BRIDGE MODE - Chế độ cầu nối chia đôi màn hình toàn màn hình
-   ============================================================ */
-#bridge-view {
-  display: none;
-  position: fixed; inset: 0; z-index: 2000;
-  background: var(--bg-main);
-  flex-direction: column;
-}
+/* BRIDGE MODE */
+#bridge-view { display: none; position: fixed; inset: 0; z-index: 2000; background: var(--bg-main); flex-direction: column; }
 #bridge-view.active { display: flex; }
-
-/* Nửa trên - hướng về người đối diện (xoay 180°) */
-.bridge-half {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  overflow: hidden;
-  position: relative;
-}
-.bridge-half.top {
-  transform: rotate(180deg);
-  background: linear-gradient(180deg, rgba(79,140,255,0.08), transparent);
-  border-bottom: 1px solid var(--border-glass);
-}
-.bridge-half.bottom {
-  background: linear-gradient(180deg, rgba(168,85,247,0.08), transparent);
-}
-.bridge-lang-label {
-  font-size: 13px; font-weight: 700; color: var(--text-dim);
-  text-align: center; margin-bottom: 8px; flex-shrink: 0;
-}
+.bridge-half { flex: 1; display: flex; flex-direction: column; padding: 16px; overflow: hidden; position: relative; }
+.bridge-half.top { transform: rotate(180deg); background: linear-gradient(180deg, rgba(79,140,255,0.08), transparent); border-bottom: 1px solid var(--border-glass); }
+.bridge-half.bottom { background: linear-gradient(180deg, rgba(168,85,247,0.08), transparent); }
+.bridge-lang-label { font-size: 13px; font-weight: 700; color: var(--text-dim); text-align: center; margin-bottom: 8px; flex-shrink: 0; }
 .bridge-half.active-speaker .bridge-lang-label { color: var(--accent-1); }
-.bridge-content {
-  flex: 1; overflow-y: auto; display: flex; flex-direction: column;
-  gap: 8px; padding: 4px;
-}
+.bridge-content { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding: 4px; }
 .bridge-content::-webkit-scrollbar { width: 5px; }
 .bridge-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
-.bridge-bubble {
-  background: rgba(0,0,0,0.3); border: 1px solid var(--border-glass);
-  border-radius: 12px; padding: 10px 14px; font-size: 16px; line-height: 1.5;
-  animation: fadeIn 0.3s ease; word-break: break-word;
-}
+.bridge-bubble { background: rgba(0,0,0,0.3); border: 1px solid var(--border-glass); border-radius: 12px; padding: 10px 14px; font-size: 16px; line-height: 1.5; animation: fadeIn 0.3s ease; word-break: break-word; }
 .bridge-bubble .b-src { font-size: 12px; color: var(--text-dim); margin-bottom: 3px; }
 .bridge-bubble .b-play { float: right; padding: 2px 8px; font-size: 12px; background: rgba(79,140,255,0.2); border:1px solid rgba(79,140,255,0.3); border-radius: 6px; color: var(--accent-1); margin-left: 6px; }
-
-/* Thanh điều khiển giữa - nút ghi âm ở tâm màn hình */
-.bridge-center {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  display: flex; align-items: center; gap: 14px;
-  background: rgba(15,15,26,0.9);
-  padding: 8px 12px; border-radius: 50px;
-  border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow);
-}
-.bridge-mic {
-  width: 76px; height: 76px; border-radius: 50%;
-  background: var(--accent-grad); font-size: 32px;
-  display: grid; place-items: center; flex-shrink: 0;
-  box-shadow: 0 6px 24px rgba(79,140,255,0.5);
-}
+.bridge-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; display: flex; align-items: center; gap: 14px; background: rgba(15,15,26,0.9); padding: 8px 12px; border-radius: 50px; border: 1px solid var(--border-glass); box-shadow: var(--shadow); }
+.bridge-mic { width: 76px; height: 76px; border-radius: 50%; background: var(--accent-grad); font-size: 32px; display: grid; place-items: center; flex-shrink: 0; box-shadow: 0 6px 24px rgba(79,140,255,0.5); }
 .bridge-mic.recording { background: linear-gradient(135deg,#ff3b3b,#ff0055); animation: pulse 1.4s infinite; }
-/* Nút chọn hướng người nói */
-.dir-btn {
-  width: 46px; height: 46px; border-radius: 50%;
-  background: rgba(255,255,255,0.08); border: 1px solid var(--border-glass);
-  font-size: 20px; display: grid; place-items: center;
-}
+.dir-btn { width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid var(--border-glass); font-size: 20px; display: grid; place-items: center; }
 .dir-btn.active { background: var(--accent-grad); border-color: transparent; }
-/* Nút thoát bridge */
-.bridge-exit {
-  position: absolute; top: 50%; right: 12px; transform: translateY(-50%);
-  z-index: 11; width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.4);
-  color: var(--danger); font-size: 18px; display: grid; place-items: center;
-}
-.bridge-status {
-  position: absolute; bottom: -34px; left: 50%; transform: translateX(-50%);
-  white-space: nowrap; font-size: 12px; font-weight: 600; color: var(--text-dim);
-  background: rgba(0,0,0,0.5); padding: 4px 12px; border-radius: 20px;
-}
+.bridge-exit { position: absolute; top: 50%; right: 12px; transform: translateY(-50%); z-index: 11; width: 40px; height: 40px; border-radius: 50%; background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.4); color: var(--danger); font-size: 18px; display: grid; place-items: center; }
+.bridge-status { position: absolute; bottom: -34px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 12px; font-weight: 600; color: var(--text-dim); background: rgba(0,0,0,0.5); padding: 4px 12px; border-radius: 20px; }
 
 /* RESPONSIVE */
 @media (max-width: 720px) {
@@ -267,9 +194,7 @@ footer a:hover { text-decoration: underline; }
       <h1>VoiceBridge AI Translator</h1>
       <p>Dịch giọng nói thời gian thực Anh ⇄ Việt · Powered by Groq</p>
     </div>
-    <div class="header-actions">
-      <button class="btn btn-primary" id="open-bridge">🤝 Chế độ Cầu nối</button>
-    </div>
+    <div class="header-actions"><button class="btn btn-primary" id="open-bridge">🤝 Chế độ Cầu nối</button></div>
   </header>
 
   <!-- ========== SETTINGS PANEL ========== -->
@@ -309,11 +234,14 @@ footer a:hover { text-decoration: underline; }
       </div>
       <div class="field">
         <label>Độ dài mỗi đoạn ghi âm (chunk duration)</label>
-        <div class="slider-wrap">
-          <input type="range" id="chunk-duration" min="2" max="5" step="1" value="3">
-          <span class="slider-val"><span id="chunk-val">3</span>s</span>
-        </div>
+        <div class="slider-wrap"><input type="range" id="chunk-duration" min="2" max="5" step="1" value="3"><span class="slider-val"><span id="chunk-val">3</span>s</span></div>
         <div class="hint">App tự ghi trọn từng đoạn rồi gửi (đảm bảo audio hợp lệ, tránh lỗi 400).</div>
+      </div>
+      <!-- MỚI: Ngưỡng phát hiện giọng nói (VAD) -->
+      <div class="field">
+        <label>Độ nhạy micro (ngưỡng phát hiện giọng nói)</label>
+        <div class="slider-wrap"><input type="range" id="vad-threshold" min="1" max="20" step="1" value="6"><span class="slider-val"><span id="vad-val">6</span></span></div>
+        <div class="hint">🎚️ Chỉ gửi đi khi phát hiện có giọng nói thật. Tăng nếu nơi ồn ào, giảm nếu nói nhỏ. Đây là bộ lọc chống Whisper "bịa" nội dung khi im lặng.</div>
       </div>
       <div class="field">
         <label class="checkbox-wrap"><input type="checkbox" id="auto-read"><span>🔊 Tự động đọc bản dịch khi hoàn thành</span></label>
@@ -335,8 +263,9 @@ footer a:hover { text-decoration: underline; }
     <div class="section-header"><div class="section-title">🎙️ Ghi âm</div></div>
     <button class="mic-btn" id="mic-btn">🎙</button>
     <div class="waveform" id="waveform"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+    <div class="vu-meter" id="vu-meter"><div class="vu-fill" id="vu-fill"></div></div>
     <div><span class="status-bar" id="status-bar">⏸ Sẵn sàng — nhấn nút micro để bắt đầu</span></div>
-    <div class="mode-note">💡 Nhấn 1 lần để bắt đầu, app tự ghi & dịch từng đoạn liên tục. Nhấn lại để dừng.</div>
+    <div class="mode-note">💡 Nhấn 1 lần để bắt đầu, app tự ghi & dịch từng đoạn liên tục. Nhấn lại để dừng. App chỉ gửi đi khi phát hiện có giọng nói thật.</div>
   </div>
 
   <!-- ========== RESULTS PANEL ========== -->
@@ -388,7 +317,6 @@ footer a:hover { text-decoration: underline; }
     </div>
   </div>
 
-  <!-- ========== FOOTER ========== -->
   <footer>
     📌 Cần Groq API Key miễn phí → <a href="https://console.groq.com" target="_blank">console.groq.com</a>
     | Free: 2000 STT req/ngày + 1000 Translation req/ngày
@@ -396,20 +324,13 @@ footer a:hover { text-decoration: underline; }
   </footer>
 </div>
 
-<!-- ============================================================
-     BRIDGE VIEW - Giao diện cầu nối chia đôi màn hình
-     ============================================================ -->
+<!-- ========== BRIDGE VIEW ========== -->
 <div id="bridge-view">
-  <!-- Nửa trên: hướng về người đối diện (xoay 180°) -->
   <div class="bridge-half top" id="bridge-top">
     <div class="bridge-lang-label" id="bridge-top-label">🇺🇸 English</div>
     <div class="bridge-content" id="bridge-top-content"></div>
   </div>
-
-  <!-- Nút thoát -->
   <button class="bridge-exit" id="bridge-exit">✕</button>
-
-  <!-- Trung tâm: nút hướng + micro + status -->
   <div class="bridge-center">
     <button class="dir-btn active" id="dir-bottom" title="Người phía dưới đang nói">🔽</button>
     <div style="position:relative;">
@@ -418,8 +339,6 @@ footer a:hover { text-decoration: underline; }
     </div>
     <button class="dir-btn" id="dir-top" title="Người phía trên đang nói">🔼</button>
   </div>
-
-  <!-- Nửa dưới: hướng về bạn -->
   <div class="bridge-half bottom active-speaker" id="bridge-bottom">
     <div class="bridge-lang-label" id="bridge-bottom-label">🇻🇳 Tiếng Việt</div>
     <div class="bridge-content" id="bridge-bottom-content"></div>
@@ -431,10 +350,10 @@ footer a:hover { text-decoration: underline; }
 <script>
 /* ============================================================
    VoiceBridge AI Translator - JS thuần ES6+
-   Bản nâng cấp: Bridge Mode + Edit inline + Copy riêng lẻ
+   Nâng cấp: VAD chống hallucination + lọc câu bịa + nút Xóa entry
    ============================================================ */
 
-const LS = { key:'vba_key', stt:'vba_stt', trans:'vba_trans', chunk:'vba_chunk', autoread:'vba_autoread', rate:'vba_rate', pitch:'vba_pitch' };
+const LS = { key:'vba_key', stt:'vba_stt', trans:'vba_trans', chunk:'vba_chunk', autoread:'vba_autoread', rate:'vba_rate', pitch:'vba_pitch', vad:'vba_vad' };
 
 let currentMode = 'en2vi';
 let isRecording = false;
@@ -447,42 +366,88 @@ let recordMime = 'audio/webm';
 let recordExt = 'webm';
 let segmentTimer = null;
 
-// --- Trạng thái riêng cho Bridge Mode ---
-let bridgeActive = false;        // Đang ở chế độ cầu nối?
-let bridgeDirection = 'bottom';  // Ai đang nói: 'bottom' (bạn) hay 'top' (đối diện)
+// --- VAD (Voice Activity Detection) qua Web Audio API ---
+let audioContext = null;
+let analyser = null;
+let vadSource = null;
+let vadRAF = null;          // requestAnimationFrame id
+let segmentHadVoice = false;   // Trong đoạn hiện tại có phát hiện giọng nói không?
+let currentPeak = 0;           // Mức âm lượng cao nhất trong đoạn
+
+// --- Bridge ---
+let bridgeActive = false;
+let bridgeDirection = 'bottom';
 
 const $ = (id) => document.getElementById(id);
+
+/* ============================================================
+   DANH SÁCH ĐEN - Các câu Whisper thường "bịa" khi im lặng
+   (hallucination phrases). Nếu kết quả khớp → loại bỏ.
+   ============================================================ */
+const HALLUCINATION_PATTERNS = [
+  // Tiếng Việt - câu cuối video phổ biến
+  /ghiền mì gõ/i,
+  /hãy subscribe/i,
+  /đăng ký kênh/i,
+  /hẹn gặp lại các bạn/i,
+  /trong (những )?video (tiếp theo|sau)/i,
+  /cảm ơn các bạn đã (xem|theo dõi)/i,
+  /like và (đăng ký|subscribe)/i,
+  /nhớ (like|đăng ký|bấm chuông)/i,
+  /bấm chuông thông báo/i,
+  // Tiếng Anh - hallucination kinh điển của Whisper
+  /subscribe to (the|my|our) channel/i,
+  /thanks? (for|you for) watching/i,
+  /don'?t forget to (subscribe|like)/i,
+  /see you (in the )?next (video|time)/i,
+  /please (subscribe|like and subscribe)/i,
+  /like, comment and subscribe/i,
+  /hit the (bell|notification)/i,
+  /this video is (brought|sponsored)/i,
+  /^\s*you\s*$/i,          // Whisper hay trả về đúng chữ "you" khi im lặng
+  /^\s*thank you\.?\s*$/i, // "Thank you." đơn độc
+  /^\s*\.\s*$/,            // chỉ có dấu chấm
+  /subtitles? by/i,
+  /amara\.org/i
+];
+
+// Kiểm tra text có phải hallucination không
+function isHallucination(text) {
+  const t = text.trim();
+  if (t.length <= 1) return true;
+  for (const p of HALLUCINATION_PATTERNS) { if (p.test(t)) return true; }
+  return false;
+}
 
 /* ============================================================
    1. API KEY
    ============================================================ */
 function getKey() { return $('api-key').value.trim(); }
-function saveKey() { const k = getKey(); if (k) localStorage.setItem(LS.key, btoa(k)); else localStorage.removeItem(LS.key); }
-
+function saveKey() { const k=getKey(); if(k) localStorage.setItem(LS.key, btoa(k)); else localStorage.removeItem(LS.key); }
 async function testKey() {
-  const k = getKey(); const status = $('key-status');
-  if (!k) { status.textContent = '⚠️ Vui lòng nhập API Key trước.'; status.style.color = 'var(--warning)'; return; }
-  status.textContent = '⏳ Đang kiểm tra...'; status.style.color = 'var(--text-dim)';
+  const k=getKey(), s=$('key-status');
+  if (!k) { s.textContent='⚠️ Vui lòng nhập API Key trước.'; s.style.color='var(--warning)'; return; }
+  s.textContent='⏳ Đang kiểm tra...'; s.style.color='var(--text-dim)';
   try {
-    const res = await fetch('https://api.groq.com/openai/v1/models', { method:'GET', headers:{ Authorization:'Bearer '+k } });
-    if (res.ok) { status.textContent = '✅ API Key hợp lệ!'; status.style.color = 'var(--success)'; saveKey(); }
-    else if (res.status === 401) { status.textContent = '❌ API Key không hợp lệ (401).'; status.style.color = 'var(--danger)'; }
-    else { status.textContent = '❌ Lỗi: HTTP '+res.status; status.style.color = 'var(--danger)'; }
-  } catch (e) { status.textContent = '📡 Lỗi kết nối internet.'; status.style.color = 'var(--danger)'; }
+    const r = await fetch('https://api.groq.com/openai/v1/models',{method:'GET',headers:{Authorization:'Bearer '+k}});
+    if (r.ok) { s.textContent='✅ API Key hợp lệ!'; s.style.color='var(--success)'; saveKey(); }
+    else if (r.status===401) { s.textContent='❌ API Key không hợp lệ (401).'; s.style.color='var(--danger)'; }
+    else { s.textContent='❌ Lỗi: HTTP '+r.status; s.style.color='var(--danger)'; }
+  } catch(e){ s.textContent='📡 Lỗi kết nối internet.'; s.style.color='var(--danger)'; }
 }
 
 /* ============================================================
    2. TOAST
    ============================================================ */
-function showToast(message, type='info') {
-  const c = $('toast-container'); const t = document.createElement('div');
-  t.className = 'toast '+(type==='error'?'error':type==='warn'?'warn':''); t.textContent = message;
-  c.appendChild(t); setTimeout(()=>{ t.classList.add('hide'); setTimeout(()=>t.remove(),300); }, 4000);
+function showToast(msg, type='info') {
+  const c=$('toast-container'), t=document.createElement('div');
+  t.className='toast '+(type==='error'?'error':type==='warn'?'warn':''); t.textContent=msg;
+  c.appendChild(t); setTimeout(()=>{ t.classList.add('hide'); setTimeout(()=>t.remove(),300); },4000);
 }
 function handleHttpError(status, detail) {
   if (status===429) showToast('⚠️ Rate limit! Vui lòng chờ vài giây.','warn');
   else if (status===401) showToast('❌ API Key không hợp lệ. Kiểm tra lại Settings.','error');
-  else if (status===400) showToast('⚠️ Lỗi 400: '+(detail||'Audio không hợp lệ hoặc quá ngắn. Hãy nói dài hơn.'),'error');
+  else if (status===400) showToast('⚠️ Lỗi 400: '+(detail||'Audio không hợp lệ hoặc quá ngắn.'),'error');
   else showToast('❌ Lỗi máy chủ: HTTP '+status,'error');
 }
 
@@ -490,44 +455,93 @@ function handleHttpError(status, detail) {
    3. MIMETYPE
    ============================================================ */
 function pickMimeType() {
-  const cands = [
-    {mime:'audio/webm;codecs=opus',ext:'webm'},{mime:'audio/webm',ext:'webm'},
-    {mime:'audio/mp4',ext:'m4a'},{mime:'audio/mpeg',ext:'mp3'},{mime:'audio/ogg;codecs=opus',ext:'ogg'}
-  ];
-  for (const c of cands) {
-    if (typeof MediaRecorder!=='undefined' && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(c.mime)) return c;
-  }
+  const cands=[{mime:'audio/webm;codecs=opus',ext:'webm'},{mime:'audio/webm',ext:'webm'},{mime:'audio/mp4',ext:'m4a'},{mime:'audio/mpeg',ext:'mp3'},{mime:'audio/ogg;codecs=opus',ext:'ogg'}];
+  for (const c of cands) if (typeof MediaRecorder!=='undefined' && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(c.mime)) return c;
   return {mime:'',ext:'webm'};
 }
 
 /* ============================================================
-   4. GHI ÂM - loop "ghi trọn đoạn rồi gửi"
+   4. VAD - Phát hiện giọng nói bằng Web Audio API
+   Đây là lớp phòng thủ chính chống hallucination:
+   nếu đoạn ghi KHÔNG có âm lượng vượt ngưỡng → coi là im lặng
+   → KHÔNG gửi lên server (Whisper sẽ không có cơ hội bịa).
+   ============================================================ */
+function setupVAD(stream) {
+  try {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioContext.createAnalyser();
+    analyser.fftSize = 512;
+    vadSource = audioContext.createMediaStreamSource(stream);
+    vadSource.connect(analyser);
+    monitorVolume();
+  } catch (e) {
+    // Nếu thiết bị không hỗ trợ Web Audio → bỏ qua VAD (vẫn ghi bình thường)
+    analyser = null;
+  }
+}
+
+// Vòng lặp đo âm lượng liên tục, cập nhật VU meter & cờ có giọng nói
+function monitorVolume() {
+  if (!analyser) return;
+  const data = new Uint8Array(analyser.frequencyBinCount);
+  const threshold = parseInt($('vad-threshold').value, 10) || 6;
+  const loop = () => {
+    if (!analyser || !isRecording) return;
+    analyser.getByteFrequencyData(data);
+    // Tính mức năng lượng trung bình (RMS đơn giản)
+    let sum = 0;
+    for (let i=0; i<data.length; i++) sum += data[i];
+    const avg = sum / data.length;   // 0..255
+    // Cập nhật thanh VU (chuẩn hóa về %)
+    const pct = Math.min(100, (avg / 60) * 100);
+    $('vu-fill').style.width = pct + '%';
+    // Nếu vượt ngưỡng → đánh dấu đoạn này CÓ giọng nói
+    if (avg >= threshold) { segmentHadVoice = true; if (avg > currentPeak) currentPeak = avg; }
+    vadRAF = requestAnimationFrame(loop);
+  };
+  loop();
+}
+
+function teardownVAD() {
+  if (vadRAF) { cancelAnimationFrame(vadRAF); vadRAF = null; }
+  if (vadSource) { try { vadSource.disconnect(); } catch(e){} vadSource = null; }
+  if (audioContext) { try { audioContext.close(); } catch(e){} audioContext = null; }
+  analyser = null;
+  $('vu-fill').style.width = '0%';
+}
+
+/* ============================================================
+   5. GHI ÂM - loop "ghi trọn đoạn rồi gửi" + VAD gate
    ============================================================ */
 async function startRecording() {
-  const k = getKey();
+  const k=getKey();
   if (!k) { showToast('⚠️ Vui lòng nhập & test API Key trong Settings.','warn'); return; }
-  try { mediaStream = await navigator.mediaDevices.getUserMedia({audio:true}); }
-  catch (e) { showToast('🎤 Không truy cập được microphone. Cần HTTPS và cấp quyền.','error'); return; }
-  const picked = pickMimeType(); recordMime = picked.mime; recordExt = picked.ext;
-  isRecording = true; updateRecordingUI(true); setStatus('⏺ Đang ghi âm');
+  try { mediaStream = await navigator.mediaDevices.getUserMedia({audio:{ echoCancellation:true, noiseSuppression:true, autoGainControl:true }}); }
+  catch(e){ showToast('🎤 Không truy cập được microphone. Cần HTTPS và cấp quyền.','error'); return; }
+  const p=pickMimeType(); recordMime=p.mime; recordExt=p.ext;
+  isRecording=true; updateRecordingUI(true); setStatus('⏺ Đang ghi âm');
+  // Bật VAD để đo âm lượng thực
+  setupVAD(mediaStream);
   recordOneSegment();
 }
 
 function recordOneSegment() {
   if (!isRecording || !mediaStream) return;
-  recordedChunks = [];
-  try {
-    mediaRecorder = recordMime ? new MediaRecorder(mediaStream,{mimeType:recordMime}) : new MediaRecorder(mediaStream);
-  } catch (e) {
-    try { mediaRecorder = new MediaRecorder(mediaStream); recordMime=''; }
-    catch (e2) { showToast('❌ Trình duyệt không hỗ trợ ghi âm.','error'); stopRecording(); return; }
-  }
-  mediaRecorder.ondataavailable = (ev) => { if (ev.data && ev.data.size>0) recordedChunks.push(ev.data); };
+  recordedChunks=[]; segmentHadVoice=false; currentPeak=0;
+  try { mediaRecorder = recordMime ? new MediaRecorder(mediaStream,{mimeType:recordMime}) : new MediaRecorder(mediaStream); }
+  catch(e){ try { mediaRecorder=new MediaRecorder(mediaStream); recordMime=''; } catch(e2){ showToast('❌ Trình duyệt không hỗ trợ ghi âm.','error'); stopRecording(); return; } }
+  mediaRecorder.ondataavailable = (ev)=>{ if (ev.data && ev.data.size>0) recordedChunks.push(ev.data); };
   mediaRecorder.onstop = () => {
     if (recordedChunks.length>0) {
       const type = mediaRecorder.mimeType || recordMime || 'audio/webm';
       const blob = new Blob(recordedChunks,{type});
-      if (blob.size>2000) processChunk(blob);
+      // LỚP PHÒNG THỦ 1: chỉ gửi nếu đoạn CÓ giọng nói (VAD) và file đủ lớn.
+      // Nếu không phát hiện giọng nói → BỎ QUA, không gọi API → Whisper không bịa.
+      if (blob.size>2000 && (analyser===null || segmentHadVoice)) {
+        processChunk(blob);
+      } else if (isRecording) {
+        setStatus('🔇 Im lặng — đang chờ giọng nói...');
+      }
     }
     if (isRecording) recordOneSegment();
   };
@@ -537,284 +551,207 @@ function recordOneSegment() {
 }
 
 function stopRecording() {
-  isRecording = false;
-  if (segmentTimer) { clearTimeout(segmentTimer); segmentTimer=null; }
+  isRecording=false;
+  if (segmentTimer){ clearTimeout(segmentTimer); segmentTimer=null; }
   if (mediaRecorder && mediaRecorder.state==='recording') mediaRecorder.stop();
-  if (mediaStream) { mediaStream.getTracks().forEach(t=>t.stop()); mediaStream=null; }
+  if (mediaStream){ mediaStream.getTracks().forEach(t=>t.stop()); mediaStream=null; }
+  teardownVAD();
   updateRecordingUI(false);
   if (!isProcessing) setStatus('⏸ Sẵn sàng — nhấn nút micro để bắt đầu');
 }
 
-// Cập nhật cả UI thường lẫn UI bridge
-function updateRecordingUI(recording) {
-  const mic = $('mic-btn'), wave = $('waveform'), bMic = $('bridge-mic');
-  if (recording) {
-    mic.classList.add('recording'); mic.textContent='⏹'; wave.classList.add('active');
-    bMic.classList.add('recording'); bMic.textContent='⏹';
-  } else {
-    mic.classList.remove('recording'); mic.textContent='🎙'; wave.classList.remove('active');
-    bMic.classList.remove('recording'); bMic.textContent='🎙';
-  }
+function updateRecordingUI(rec) {
+  const mic=$('mic-btn'), wave=$('waveform'), bMic=$('bridge-mic'), vu=$('vu-meter');
+  if (rec){ mic.classList.add('recording'); mic.textContent='⏹'; wave.classList.add('active'); vu.classList.add('active'); bMic.classList.add('recording'); bMic.textContent='⏹'; }
+  else { mic.classList.remove('recording'); mic.textContent='🎙'; wave.classList.remove('active'); vu.classList.remove('active'); bMic.classList.remove('recording'); bMic.textContent='🎙'; }
 }
-
-// setStatus cập nhật cả status bar thường và status bridge
-function setStatus(text) {
-  $('status-bar').textContent = text;
-  const short = text.replace(/^[^\wÀ-ỹ]+\s*/,''); // bỏ emoji đầu cho gọn
-  $('bridge-status').textContent = short || text;
-}
+function setStatus(text) { $('status-bar').textContent=text; const short=text.replace(/^[^\wÀ-ỹ]+\s*/,''); $('bridge-status').textContent=short||text; }
 
 /* ============================================================
-   5. PROCESS CHUNK - STT
+   6. PROCESS CHUNK - STT (có chống hallucination)
    ============================================================ */
 async function processChunk(audioBlob) {
-  isProcessing = true; setStatus('🔄 Đang phiên âm...');
-  // Trong bridge mode, mode dịch được xác định theo hướng người nói
+  isProcessing=true; setStatus('🔄 Đang phiên âm...');
   const srcCode = getSourceCode();
   const fd = new FormData();
   fd.append('file', audioBlob, 'audio.'+recordExt);
   fd.append('model', $('stt-model').value);
   fd.append('language', srcCode);
   fd.append('response_format','json');
+  // LỚP PHÒNG THỦ 2: prompt rỗng + temperature 0 giúp Whisper bớt "sáng tác"
+  fd.append('temperature','0');
   try {
-    const res = await fetch('https://api.groq.com/openai/v1/audio/transcriptions', {
-      method:'POST', headers:{ Authorization:'Bearer '+getKey() }, body:fd
-    });
-    if (!res.ok) {
-      let detail=''; try { const err=await res.json(); detail=err?.error?.message||''; } catch(e){}
-      handleHttpError(res.status, detail); isProcessing=false;
-      if (!isRecording) setStatus('⏸ Sẵn sàng'); return;
+    const res = await fetch('https://api.groq.com/openai/v1/audio/transcriptions',{method:'POST',headers:{Authorization:'Bearer '+getKey()},body:fd});
+    if (!res.ok){ let d=''; try{const e=await res.json();d=e?.error?.message||'';}catch(x){} handleHttpError(res.status,d); isProcessing=false; if(!isRecording) setStatus('⏸ Sẵn sàng'); return; }
+    const data = await res.json(); const text=(data.text||'').trim();
+    // LỚP PHÒNG THỦ 3: lọc câu hallucination đã biết
+    if (isHallucination(text)) {
+      isProcessing=false;
+      if (isRecording) setStatus('⏺ Đang ghi âm'); else setStatus('⏸ Sẵn sàng');
+      return; // BỎ QUA, không hiển thị, không dịch
     }
-    const data = await res.json(); const text = (data.text||'').trim();
-    if (!text || text.length<=1) { isProcessing=false; if(!isRecording) setStatus('⏸ Sẵn sàng'); return; }
     addEntry('original-panel', text, srcCode);
     await translateText(text);
-  } catch (e) { showToast('📡 Lỗi kết nối internet.','error'); }
+  } catch(e){ showToast('📡 Lỗi kết nối internet.','error'); }
   finally {
     isProcessing=false;
-    if (!isRecording) { setStatus('✅ Hoàn thành'); setTimeout(()=>{ if(!isRecording&&!isProcessing) setStatus('⏸ Sẵn sàng — nhấn nút micro để bắt đầu'); },1500); }
+    if (!isRecording){ setStatus('✅ Hoàn thành'); setTimeout(()=>{ if(!isRecording&&!isProcessing) setStatus('⏸ Sẵn sàng — nhấn nút micro để bắt đầu'); },1500); }
     else setStatus('⏺ Đang ghi âm');
   }
 }
 
-// Xác định ngôn ngữ nguồn / đích tùy chế độ (thường hoặc bridge)
-function getSourceCode() {
-  if (bridgeActive) {
-    // bottom = bạn (mặc định tiếng Việt), top = đối diện (tiếng Anh)
-    return bridgeDirection === 'bottom' ? 'vi' : 'en';
-  }
-  return currentMode === 'en2vi' ? 'en' : 'vi';
-}
-function getTargetCode() {
-  if (bridgeActive) return bridgeDirection === 'bottom' ? 'en' : 'vi';
-  return currentMode === 'en2vi' ? 'vi' : 'en';
-}
+function getSourceCode() { if (bridgeActive) return bridgeDirection==='bottom'?'vi':'en'; return currentMode==='en2vi'?'en':'vi'; }
+function getTargetCode() { if (bridgeActive) return bridgeDirection==='bottom'?'en':'vi'; return currentMode==='en2vi'?'vi':'en'; }
 
 /* ============================================================
-   6. TRANSLATE
+   7. TRANSLATE
    ============================================================ */
 async function translateText(text) {
   setStatus('🌐 Đang dịch...');
-  const srcCode = getSourceCode(), tgtCode = getTargetCode();
-  const sourceLang = srcCode==='en' ? 'English' : 'Vietnamese';
-  const targetLang = tgtCode==='en' ? 'English' : 'Vietnamese';
-  const systemPrompt =
-    `You are a professional translator specializing in English-Vietnamese translation. `+
-    `Translate the following ${sourceLang} text to ${targetLang}. `+
-    `Return ONLY the translated text, no explanations, no additional notes, no quotation marks.`;
+  const srcCode=getSourceCode(), tgtCode=getTargetCode();
+  const sourceLang=srcCode==='en'?'English':'Vietnamese', targetLang=tgtCode==='en'?'English':'Vietnamese';
+  const systemPrompt=`You are a professional translator specializing in English-Vietnamese translation. Translate the following ${sourceLang} text to ${targetLang}. Return ONLY the translated text, no explanations, no additional notes, no quotation marks.`;
   try {
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method:'POST', headers:{ Authorization:'Bearer '+getKey(), 'Content-Type':'application/json' },
-      body: JSON.stringify({ model:$('trans-model').value,
-        messages:[{role:'system',content:systemPrompt},{role:'user',content:text}],
-        temperature:0.1, max_tokens:500 })
-    });
-    if (!res.ok) { let d=''; try{const e=await res.json();d=e?.error?.message||'';}catch(x){} handleHttpError(res.status,d); return; }
-    const data = await res.json();
-    const translated = (data.choices?.[0]?.message?.content||'').trim();
-    if (!translated) return;
-    addEntry('translation-panel', translated, tgtCode);
-    // Trong bridge mode: hiển thị bong bóng ở 2 nửa màn hình
-    if (bridgeActive) addBridgeBubble(text, translated, srcCode, tgtCode);
-    if ($('auto-read').checked || bridgeActive) speakText(translated, tgtCode);
-  } catch (e) { showToast('📡 Lỗi kết nối internet.','error'); }
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{Authorization:'Bearer '+getKey(),'Content-Type':'application/json'},body:JSON.stringify({model:$('trans-model').value,messages:[{role:'system',content:systemPrompt},{role:'user',content:text}],temperature:0.1,max_tokens:500})});
+    if (!res.ok){ let d=''; try{const e=await res.json();d=e?.error?.message||'';}catch(x){} handleHttpError(res.status,d); return; }
+    const data=await res.json(); const tr=(data.choices?.[0]?.message?.content||'').trim();
+    if (!tr) return;
+    addEntry('translation-panel', tr, tgtCode);
+    if (bridgeActive) addBridgeBubble(text, tr, srcCode, tgtCode);
+    if ($('auto-read').checked || bridgeActive) speakText(tr, tgtCode);
+  } catch(e){ showToast('📡 Lỗi kết nối internet.','error'); }
 }
 
 /* ============================================================
-   7. ENTRY (panel thường) - có EDIT + COPY riêng lẻ
+   8. ENTRY - Edit + Copy riêng lẻ + XÓA (mới)
    ============================================================ */
 function nowTime() { return new Date().toTimeString().split(' ')[0]; }
 
 function addEntry(panelId, text, lang) {
-  const panel = $(panelId);
-  const hint = panel.querySelector('.empty-hint'); if (hint) hint.remove();
+  const panel=$(panelId); const hint=panel.querySelector('.empty-hint'); if(hint) hint.remove();
+  const entry=document.createElement('div'); entry.className='entry'; entry.dataset.lang=lang;
+  const isOriginal=(panelId==='original-panel');
 
-  const entry = document.createElement('div'); entry.className='entry';
-  entry.dataset.lang = lang;
-  // Panel gốc: đánh dấu để có thể dịch lại sau khi sửa
-  const isOriginal = (panelId === 'original-panel');
+  const top=document.createElement('div'); top.className='entry-top';
+  const time=document.createElement('span'); time.className='entry-time'; time.textContent='🕐 '+nowTime();
 
-  const top = document.createElement('div'); top.className='entry-top';
-  const time = document.createElement('span'); time.className='entry-time'; time.textContent='🕐 '+nowTime();
+  const btns=document.createElement('div'); btns.className='entry-btns';
+  const playBtn=document.createElement('button'); playBtn.className='entry-btn'; playBtn.textContent='▶'; playBtn.title='Đọc';
+  playBtn.onclick=()=>speakText(getEntryText(entry), entry.dataset.lang);
+  const editBtn=document.createElement('button'); editBtn.className='entry-btn edit'; editBtn.textContent='✏️'; editBtn.title='Sửa';
+  editBtn.onclick=()=>startEditEntry(entry, isOriginal);
+  const copyBtn=document.createElement('button'); copyBtn.className='entry-btn copy'; copyBtn.textContent='📋'; copyBtn.title='Copy dòng này';
+  copyBtn.onclick=()=>copyText(getEntryText(entry));
+  // MỚI: nút Xóa entry riêng lẻ
+  const delBtn=document.createElement('button'); delBtn.className='entry-btn del'; delBtn.textContent='🗑'; delBtn.title='Xóa dòng này';
+  delBtn.onclick=()=>deleteEntry(entry, panelId);
 
-  const btns = document.createElement('div'); btns.className='entry-btns';
-  // Nút ▶ Đọc
-  const playBtn = document.createElement('button'); playBtn.className='entry-btn'; playBtn.textContent='▶';
-  playBtn.title='Đọc'; playBtn.onclick = () => speakText(getEntryText(entry), entry.dataset.lang);
-  // Nút ✏️ Sửa
-  const editBtn = document.createElement('button'); editBtn.className='entry-btn edit'; editBtn.textContent='✏️';
-  editBtn.title='Sửa'; editBtn.onclick = () => startEditEntry(entry, isOriginal);
-  // Nút 📋 Copy riêng lẻ
-  const copyBtn = document.createElement('button'); copyBtn.className='entry-btn copy'; copyBtn.textContent='📋';
-  copyBtn.title='Copy dòng này'; copyBtn.onclick = () => copyText(getEntryText(entry));
-
-  btns.appendChild(playBtn); btns.appendChild(editBtn); btns.appendChild(copyBtn);
+  btns.appendChild(playBtn); btns.appendChild(editBtn); btns.appendChild(copyBtn); btns.appendChild(delBtn);
   top.appendChild(time); top.appendChild(btns);
 
-  const body = document.createElement('div'); body.className='entry-text'; body.textContent = text;
+  const body=document.createElement('div'); body.className='entry-text'; body.textContent=text;
   entry.appendChild(top); entry.appendChild(body);
-  panel.appendChild(entry); panel.scrollTop = panel.scrollHeight;
+  panel.appendChild(entry); panel.scrollTop=panel.scrollHeight;
 }
 
-// Lấy text hiện tại của entry
-function getEntryText(entry) { return entry.querySelector('.entry-text')?.textContent || ''; }
+function getEntryText(entry){ return entry.querySelector('.entry-text')?.textContent || ''; }
 
-// Bắt đầu sửa inline một entry
-function startEditEntry(entry, isOriginal) {
-  const body = entry.querySelector('.entry-text');
-  if (!body || entry.querySelector('.entry-edit-area')) return; // đang sửa rồi
-  const oldText = body.textContent;
-
-  // Tạo textarea
-  const ta = document.createElement('textarea');
-  ta.className='entry-edit-area'; ta.value = oldText;
-  const actions = document.createElement('div'); actions.className='edit-actions';
-  const saveBtn = document.createElement('button'); saveBtn.className='entry-btn copy'; saveBtn.textContent='💾 Lưu';
-  const cancelBtn = document.createElement('button'); cancelBtn.className='entry-btn'; cancelBtn.textContent='✕ Hủy';
-
-  // Với entry gốc → cho phép "Lưu & Dịch lại"
-  let retransBtn = null;
-  if (isOriginal) {
-    retransBtn = document.createElement('button'); retransBtn.className='entry-btn edit'; retransBtn.textContent='🔁 Lưu & Dịch lại';
+// Xóa 1 entry, nếu panel rỗng thì khôi phục gợi ý
+function deleteEntry(entry, panelId) {
+  entry.remove();
+  const panel=$(panelId);
+  if (panel.querySelectorAll('.entry').length===0) {
+    const t = panelId==='original-panel'?'Chưa có văn bản. Bắt đầu ghi âm để phiên âm...':'Chưa có bản dịch.';
+    panel.innerHTML=`<div class="empty-hint">${t}</div>`;
   }
+}
 
+function startEditEntry(entry, isOriginal) {
+  const body=entry.querySelector('.entry-text');
+  if (!body || entry.querySelector('.entry-edit-area')) return;
+  const oldText=body.textContent;
+  const ta=document.createElement('textarea'); ta.className='entry-edit-area'; ta.value=oldText;
+  const actions=document.createElement('div'); actions.className='edit-actions';
+  const saveBtn=document.createElement('button'); saveBtn.className='entry-btn copy'; saveBtn.textContent='💾 Lưu';
+  const cancelBtn=document.createElement('button'); cancelBtn.className='entry-btn'; cancelBtn.textContent='✕ Hủy';
+  let retransBtn=null;
+  if (isOriginal){ retransBtn=document.createElement('button'); retransBtn.className='entry-btn edit'; retransBtn.textContent='🔁 Lưu & Dịch lại'; }
   actions.appendChild(saveBtn); if (retransBtn) actions.appendChild(retransBtn); actions.appendChild(cancelBtn);
-  body.style.display='none';
-  entry.appendChild(ta); entry.appendChild(actions);
-  ta.focus();
-
-  const cleanup = () => { ta.remove(); actions.remove(); body.style.display=''; };
-  saveBtn.onclick = () => { body.textContent = ta.value.trim() || oldText; cleanup(); showToast('💾 Đã lưu chỉnh sửa.'); };
-  cancelBtn.onclick = () => cleanup();
-  if (retransBtn) retransBtn.onclick = async () => {
-    const newText = ta.value.trim(); if (!newText) { cleanup(); return; }
-    body.textContent = newText; cleanup();
-    showToast('🔁 Đang dịch lại...');
-    // Dịch lại theo ngôn ngữ của entry gốc
-    const srcLang = entry.dataset.lang;
-    await retranslate(newText, srcLang);
-  };
+  body.style.display='none'; entry.appendChild(ta); entry.appendChild(actions); ta.focus();
+  const cleanup=()=>{ ta.remove(); actions.remove(); body.style.display=''; };
+  saveBtn.onclick=()=>{ body.textContent=ta.value.trim()||oldText; cleanup(); showToast('💾 Đã lưu chỉnh sửa.'); };
+  cancelBtn.onclick=()=>cleanup();
+  if (retransBtn) retransBtn.onclick=async()=>{ const nt=ta.value.trim(); if(!nt){cleanup();return;} body.textContent=nt; cleanup(); showToast('🔁 Đang dịch lại...'); await retranslate(nt, entry.dataset.lang); };
 }
 
-// Dịch lại một đoạn text đã sửa (dùng khi edit entry gốc)
 async function retranslate(text, srcCode) {
-  const tgtCode = srcCode==='en' ? 'vi' : 'en';
-  const sourceLang = srcCode==='en'?'English':'Vietnamese';
-  const targetLang = tgtCode==='en'?'English':'Vietnamese';
-  const systemPrompt = `You are a professional translator specializing in English-Vietnamese translation. Translate the following ${sourceLang} text to ${targetLang}. Return ONLY the translated text, no explanations, no additional notes, no quotation marks.`;
+  const tgtCode=srcCode==='en'?'vi':'en';
+  const sourceLang=srcCode==='en'?'English':'Vietnamese', targetLang=tgtCode==='en'?'English':'Vietnamese';
+  const systemPrompt=`You are a professional translator specializing in English-Vietnamese translation. Translate the following ${sourceLang} text to ${targetLang}. Return ONLY the translated text, no explanations, no additional notes, no quotation marks.`;
   try {
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method:'POST', headers:{ Authorization:'Bearer '+getKey(), 'Content-Type':'application/json' },
-      body: JSON.stringify({ model:$('trans-model').value, messages:[{role:'system',content:systemPrompt},{role:'user',content:text}], temperature:0.1, max_tokens:500 })
-    });
-    if (!res.ok) { let d=''; try{const e=await res.json();d=e?.error?.message||'';}catch(x){} handleHttpError(res.status,d); return; }
-    const data = await res.json(); const tr = (data.choices?.[0]?.message?.content||'').trim();
-    if (tr) { addEntry('translation-panel', tr, tgtCode); showToast('✅ Đã dịch lại.'); }
-  } catch (e) { showToast('📡 Lỗi kết nối internet.','error'); }
+    const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{Authorization:'Bearer '+getKey(),'Content-Type':'application/json'},body:JSON.stringify({model:$('trans-model').value,messages:[{role:'system',content:systemPrompt},{role:'user',content:text}],temperature:0.1,max_tokens:500})});
+    if (!res.ok){ let d=''; try{const e=await res.json();d=e?.error?.message||'';}catch(x){} handleHttpError(res.status,d); return; }
+    const data=await res.json(); const tr=(data.choices?.[0]?.message?.content||'').trim();
+    if (tr){ addEntry('translation-panel', tr, tgtCode); showToast('✅ Đã dịch lại.'); }
+  } catch(e){ showToast('📡 Lỗi kết nối internet.','error'); }
 }
 
-// Copy 1 đoạn text (dùng chung, có fallback)
 function copyText(text) {
-  if (!text) { showToast('📋 Không có nội dung.','warn'); return; }
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(()=>showToast('📋 Đã copy!')).catch(()=>fallbackCopy(text));
-  } else fallbackCopy(text);
+  if (!text){ showToast('📋 Không có nội dung.','warn'); return; }
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(()=>showToast('📋 Đã copy!')).catch(()=>fallbackCopy(text));
+  else fallbackCopy(text);
 }
 function copyPanel(panelId) {
-  const texts = [...$(panelId).querySelectorAll('.entry-text')].map(e=>e.textContent);
-  if (texts.length===0) { showToast('📋 Chưa có nội dung để copy.','warn'); return; }
+  const texts=[...$(panelId).querySelectorAll('.entry-text')].map(e=>e.textContent);
+  if (texts.length===0){ showToast('📋 Chưa có nội dung để copy.','warn'); return; }
   copyText(texts.join('\n'));
 }
 function fallbackCopy(text) {
-  const ta = document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+  const ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
   document.body.appendChild(ta); ta.select();
-  try { document.execCommand('copy'); showToast('📋 Đã copy!'); } catch(e){ showToast('❌ Không copy được.','error'); }
+  try{ document.execCommand('copy'); showToast('📋 Đã copy!'); }catch(e){ showToast('❌ Không copy được.','error'); }
   document.body.removeChild(ta);
 }
 function clearPanel(panelId) {
-  const t = panelId==='original-panel'?'Chưa có văn bản. Bắt đầu ghi âm để phiên âm...':'Chưa có bản dịch.';
-  $(panelId).innerHTML = `<div class="empty-hint">${t}</div>`;
+  const t=panelId==='original-panel'?'Chưa có văn bản. Bắt đầu ghi âm để phiên âm...':'Chưa có bản dịch.';
+  $(panelId).innerHTML=`<div class="empty-hint">${t}</div>`;
 }
 
 /* ============================================================
-   8. BRIDGE MODE - Hiển thị bong bóng ở 2 nửa màn hình
+   9. BRIDGE MODE
    ============================================================ */
-// Khi có bản dịch: hiện text gốc ở nửa người NÓI, bản dịch ở nửa người NGHE
 function addBridgeBubble(srcText, tgtText, srcCode, tgtCode) {
-  // Người nói = bridgeDirection; người nghe = nửa còn lại
-  const speakerHalf = bridgeDirection;                    // 'bottom' hoặc 'top'
-  const listenerHalf = bridgeDirection==='bottom' ? 'top' : 'bottom';
-
-  // Bong bóng ở nửa người nói: hiện câu gốc của họ
+  const speakerHalf=bridgeDirection, listenerHalf=bridgeDirection==='bottom'?'top':'bottom';
   addBubbleToHalf(speakerHalf, srcText, srcCode, true);
-  // Bong bóng ở nửa người nghe: hiện bản dịch để họ đọc
   addBubbleToHalf(listenerHalf, tgtText, tgtCode, false);
 }
-
 function addBubbleToHalf(half, text, langCode, isSource) {
-  const content = half==='top' ? $('bridge-top-content') : $('bridge-bottom-content');
-  const bubble = document.createElement('div'); bubble.className='bridge-bubble';
-  const label = document.createElement('div'); label.className='b-src';
-  label.textContent = isSource ? '🎤 ' + nowTime() : '🌐 ' + nowTime();
-  const play = document.createElement('button'); play.className='b-play'; play.textContent='▶';
-  play.onclick = () => speakText(text, langCode);
-  const txt = document.createElement('span'); txt.textContent = text;
-  label.appendChild(play);
-  bubble.appendChild(label); bubble.appendChild(txt);
-  content.appendChild(bubble); content.scrollTop = content.scrollHeight;
+  const content=half==='top'?$('bridge-top-content'):$('bridge-bottom-content');
+  const bubble=document.createElement('div'); bubble.className='bridge-bubble';
+  const label=document.createElement('div'); label.className='b-src';
+  label.textContent=(isSource?'🎤 ':'🌐 ')+nowTime();
+  const play=document.createElement('button'); play.className='b-play'; play.textContent='▶'; play.onclick=()=>speakText(text, langCode);
+  const txt=document.createElement('span'); txt.textContent=text;
+  label.appendChild(play); bubble.appendChild(label); bubble.appendChild(txt);
+  content.appendChild(bubble); content.scrollTop=content.scrollHeight;
 }
-
-// Cập nhật nhãn ngôn ngữ & highlight nửa người đang nói
 function updateBridgeLabels() {
-  // bottom (bạn) = tiếng Việt, top (đối diện) = tiếng Anh
-  $('bridge-top-label').textContent = '🇺🇸 English';
-  $('bridge-bottom-label').textContent = '🇻🇳 Tiếng Việt';
+  $('bridge-top-label').textContent='🇺🇸 English'; $('bridge-bottom-label').textContent='🇻🇳 Tiếng Việt';
   $('bridge-top').classList.toggle('active-speaker', bridgeDirection==='top');
   $('bridge-bottom').classList.toggle('active-speaker', bridgeDirection==='bottom');
   $('dir-top').classList.toggle('active', bridgeDirection==='top');
   $('dir-bottom').classList.toggle('active', bridgeDirection==='bottom');
 }
-
-function openBridge() {
-  bridgeActive = true;
-  $('bridge-view').classList.add('active');
-  updateBridgeLabels();
-  showToast('🤝 Chế độ Cầu nối: đặt điện thoại giữa 2 người. Chọn hướng người nói rồi bấm micro.');
-}
-function closeBridge() {
-  if (isRecording) stopRecording();
-  bridgeActive = false;
-  $('bridge-view').classList.remove('active');
-}
+function openBridge(){ bridgeActive=true; $('bridge-view').classList.add('active'); updateBridgeLabels(); showToast('🤝 Chế độ Cầu nối: đặt điện thoại giữa 2 người. Chọn hướng người nói rồi bấm micro.'); }
+function closeBridge(){ if (isRecording) stopRecording(); bridgeActive=false; $('bridge-view').classList.remove('active'); }
 
 /* ============================================================
-   9. TTS
+   10. TTS
    ============================================================ */
 function loadVoices() {
-  voices = window.speechSynthesis.getVoices();
+  voices=window.speechSynthesis.getVoices();
   const en=$('voice-en'), vi=$('voice-vi'); en.innerHTML=''; vi.innerHTML='';
-  const enV = voices.filter(v=>v.lang.toLowerCase().startsWith('en'));
-  const viV = voices.filter(v=>v.lang.toLowerCase().startsWith('vi'));
+  const enV=voices.filter(v=>v.lang.toLowerCase().startsWith('en')), viV=voices.filter(v=>v.lang.toLowerCase().startsWith('vi'));
   if (enV.length===0) en.innerHTML='<option value="">(Không có giọng tiếng Anh)</option>';
   else enV.forEach(v=>{const o=document.createElement('option');o.value=v.name;o.textContent=`${v.name} (${v.lang})`;en.appendChild(o);});
   if (viV.length===0) vi.innerHTML='<option value="">(Không có giọng tiếng Việt — dùng mặc định)</option>';
@@ -822,78 +759,68 @@ function loadVoices() {
 }
 function speakText(text, lang) {
   if (!text) return; window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.rate=parseFloat($('tts-rate').value); u.pitch=parseFloat($('tts-pitch').value);
-  let name='';
-  if (lang==='en') { u.lang='en-US'; name=$('voice-en').value; } else { u.lang='vi-VN'; name=$('voice-vi').value; }
-  const v = voices.find(x=>x.name===name); if (v) u.voice=v;
+  const u=new SpeechSynthesisUtterance(text); u.rate=parseFloat($('tts-rate').value); u.pitch=parseFloat($('tts-pitch').value);
+  let name=''; if (lang==='en'){ u.lang='en-US'; name=$('voice-en').value; } else { u.lang='vi-VN'; name=$('voice-vi').value; }
+  const v=voices.find(x=>x.name===name); if (v) u.voice=v;
   window.speechSynthesis.speak(u);
 }
 function readAllTranslation() {
-  const texts = [...$('translation-panel').querySelectorAll('.entry-text')].map(e=>e.textContent);
-  if (texts.length===0) { showToast('🔊 Chưa có bản dịch để đọc.','warn'); return; }
+  const texts=[...$('translation-panel').querySelectorAll('.entry-text')].map(e=>e.textContent);
+  if (texts.length===0){ showToast('🔊 Chưa có bản dịch để đọc.','warn'); return; }
   speakText(texts.join('. '), getTargetCode());
 }
 function updateVoiceDropdownVisibility() {
-  const t = currentMode==='en2vi'?'vi':'en';
-  if (t==='vi') { $('voice-vi').style.display='block'; $('voice-en').style.display='none'; }
-  else { $('voice-en').style.display='block'; $('voice-vi').style.display='none'; }
+  const t=currentMode==='en2vi'?'vi':'en';
+  if (t==='vi'){ $('voice-vi').style.display='block'; $('voice-en').style.display='none'; } else { $('voice-en').style.display='block'; $('voice-vi').style.display='none'; }
 }
 
 /* ============================================================
-   10. LOCALSTORAGE
+   11. LOCALSTORAGE
    ============================================================ */
 function loadSettings() {
   const sk=localStorage.getItem(LS.key); if(sk){try{$('api-key').value=atob(sk);}catch(e){}}
   const stt=localStorage.getItem(LS.stt); if(stt)$('stt-model').value=stt;
   const tr=localStorage.getItem(LS.trans); if(tr)$('trans-model').value=tr;
   const ch=localStorage.getItem(LS.chunk); if(ch){$('chunk-duration').value=ch;$('chunk-val').textContent=ch;}
+  const vd=localStorage.getItem(LS.vad); if(vd){$('vad-threshold').value=vd;$('vad-val').textContent=vd;}
   const ar=localStorage.getItem(LS.autoread); if(ar)$('auto-read').checked=(ar==='true');
   const ra=localStorage.getItem(LS.rate); if(ra){$('tts-rate').value=ra;$('rate-val').textContent=parseFloat(ra).toFixed(1);}
   const pi=localStorage.getItem(LS.pitch); if(pi){$('tts-pitch').value=pi;$('pitch-val').textContent=parseFloat(pi).toFixed(1);}
 }
 
 /* ============================================================
-   11. KHỞI TẠO
+   12. KHỞI TẠO
    ============================================================ */
 function init() {
-  $('settings-toggle').addEventListener('click', ()=>{ $('settings-body').classList.toggle('collapsed'); $('chevron').classList.toggle('open'); });
-  $('toggle-key').addEventListener('click', ()=>{ const i=$('api-key'); i.type = i.type==='password'?'text':'password'; });
+  $('settings-toggle').addEventListener('click',()=>{ $('settings-body').classList.toggle('collapsed'); $('chevron').classList.toggle('open'); });
+  $('toggle-key').addEventListener('click',()=>{ const i=$('api-key'); i.type=i.type==='password'?'text':'password'; });
   $('test-key').addEventListener('click', testKey);
   $('api-key').addEventListener('blur', saveKey);
-  $('stt-model').addEventListener('change', ()=>localStorage.setItem(LS.stt,$('stt-model').value));
-  $('trans-model').addEventListener('change', ()=>localStorage.setItem(LS.trans,$('trans-model').value));
-  $('auto-read').addEventListener('change', ()=>localStorage.setItem(LS.autoread,$('auto-read').checked));
-  $('chunk-duration').addEventListener('input', e=>{ $('chunk-val').textContent=e.target.value; localStorage.setItem(LS.chunk,e.target.value); });
-  $('tts-rate').addEventListener('input', e=>{ $('rate-val').textContent=parseFloat(e.target.value).toFixed(1); localStorage.setItem(LS.rate,e.target.value); });
-  $('tts-pitch').addEventListener('input', e=>{ $('pitch-val').textContent=parseFloat(e.target.value).toFixed(1); localStorage.setItem(LS.pitch,e.target.value); });
+  $('stt-model').addEventListener('change',()=>localStorage.setItem(LS.stt,$('stt-model').value));
+  $('trans-model').addEventListener('change',()=>localStorage.setItem(LS.trans,$('trans-model').value));
+  $('auto-read').addEventListener('change',()=>localStorage.setItem(LS.autoread,$('auto-read').checked));
+  $('chunk-duration').addEventListener('input',e=>{ $('chunk-val').textContent=e.target.value; localStorage.setItem(LS.chunk,e.target.value); });
+  $('vad-threshold').addEventListener('input',e=>{ $('vad-val').textContent=e.target.value; localStorage.setItem(LS.vad,e.target.value); });
+  $('tts-rate').addEventListener('input',e=>{ $('rate-val').textContent=parseFloat(e.target.value).toFixed(1); localStorage.setItem(LS.rate,e.target.value); });
+  $('tts-pitch').addEventListener('input',e=>{ $('pitch-val').textContent=parseFloat(e.target.value).toFixed(1); localStorage.setItem(LS.pitch,e.target.value); });
 
-  document.querySelectorAll('.mode-btn').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active'); currentMode=btn.dataset.mode; updateVoiceDropdownVisibility();
-    });
-  });
+  document.querySelectorAll('.mode-btn').forEach(btn=>{ btn.addEventListener('click',()=>{ document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentMode=btn.dataset.mode; updateVoiceDropdownVisibility(); }); });
 
-  $('mic-btn').addEventListener('click', ()=>{ if(isRecording) stopRecording(); else startRecording(); });
-
-  document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click', ()=>copyPanel(b.dataset.copy)));
-  document.querySelectorAll('[data-clear]').forEach(b=>b.addEventListener('click', ()=>clearPanel(b.dataset.clear)));
-
-  $('tts-stop').addEventListener('click', ()=>window.speechSynthesis.cancel());
+  $('mic-btn').addEventListener('click',()=>{ if(isRecording) stopRecording(); else startRecording(); });
+  document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copyPanel(b.dataset.copy)));
+  document.querySelectorAll('[data-clear]').forEach(b=>b.addEventListener('click',()=>clearPanel(b.dataset.clear)));
+  $('tts-stop').addEventListener('click',()=>window.speechSynthesis.cancel());
   $('tts-readall').addEventListener('click', readAllTranslation);
 
-  // --- Bridge Mode events ---
   $('open-bridge').addEventListener('click', openBridge);
   $('bridge-exit').addEventListener('click', closeBridge);
-  $('bridge-mic').addEventListener('click', ()=>{ if(isRecording) stopRecording(); else startRecording(); });
-  $('dir-bottom').addEventListener('click', ()=>{ bridgeDirection='bottom'; updateBridgeLabels(); });
-  $('dir-top').addEventListener('click', ()=>{ bridgeDirection='top'; updateBridgeLabels(); });
+  $('bridge-mic').addEventListener('click',()=>{ if(isRecording) stopRecording(); else startRecording(); });
+  $('dir-bottom').addEventListener('click',()=>{ bridgeDirection='bottom'; updateBridgeLabels(); });
+  $('dir-top').addEventListener('click',()=>{ bridgeDirection='top'; updateBridgeLabels(); });
 
   loadVoices();
-  if (typeof window.speechSynthesis!=='undefined') window.speechSynthesis.onvoiceschanged = loadVoices;
+  if (typeof window.speechSynthesis!=='undefined') window.speechSynthesis.onvoiceschanged=loadVoices;
   loadSettings(); updateVoiceDropdownVisibility();
-
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) showToast('⚠️ Trình duyệt không hỗ trợ ghi âm. Dùng Chrome/Edge & HTTPS.','warn');
 }
 document.addEventListener('DOMContentLoaded', init);
