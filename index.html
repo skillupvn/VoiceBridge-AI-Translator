@@ -13,12 +13,12 @@
    CSS VARIABLES - Biến màu sắc & cấu hình dùng chung
    ============================================================ */
 :root {
-  --bg-main: #0f0f1a;              /* Nền chính tối */
-  --bg-panel: rgba(28, 28, 48, 0.55);   /* Nền panel glassmorphism */
+  --bg-main: #0f0f1a;
+  --bg-panel: rgba(28, 28, 48, 0.55);
   --bg-panel-solid: #1a1a2e;
   --border-glass: rgba(255, 255, 255, 0.08);
-  --accent-1: #4f8cff;            /* Xanh dương */
-  --accent-2: #a855f7;            /* Tím */
+  --accent-1: #4f8cff;
+  --accent-2: #a855f7;
   --accent-grad: linear-gradient(135deg, #4f8cff 0%, #a855f7 100%);
   --text-main: #e8e8f0;
   --text-dim: #8a8aa5;
@@ -29,9 +29,6 @@
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
 }
 
-/* ============================================================
-   RESET & BASE
-   ============================================================ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -40,20 +37,14 @@ body {
   color: var(--text-main);
   min-height: 100vh;
   line-height: 1.5;
-  /* Nền gradient trang trí phía sau */
   background-image:
     radial-gradient(circle at 15% 20%, rgba(79, 140, 255, 0.12), transparent 40%),
     radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.12), transparent 40%);
   background-attachment: fixed;
 }
 
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 20px 16px 60px;
-}
+.container { max-width: 1100px; margin: 0 auto; padding: 20px 16px 60px; }
 
-/* Panel glassmorphism dùng chung */
 .glass {
   background: var(--bg-panel);
   backdrop-filter: blur(14px);
@@ -63,416 +54,166 @@ body {
   box-shadow: var(--shadow);
 }
 
-/* ============================================================
-   HEADER
-   ============================================================ */
-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 20px 24px;
-  margin-bottom: 20px;
-}
+/* HEADER */
+header { display: flex; align-items: center; gap: 14px; padding: 20px 24px; margin-bottom: 20px; }
 .logo {
-  width: 52px; height: 52px;
-  border-radius: 14px;
-  background: var(--accent-grad);
-  display: grid;
-  place-items: center;
-  font-size: 26px;
-  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
-  flex-shrink: 0;
+  width: 52px; height: 52px; border-radius: 14px; background: var(--accent-grad);
+  display: grid; place-items: center; font-size: 26px;
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4); flex-shrink: 0;
 }
 .app-title h1 {
-  font-size: 24px;
-  font-weight: 800;
-  background: var(--accent-grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 24px; font-weight: 800; background: var(--accent-grad);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 .app-title p { font-size: 13px; color: var(--text-dim); }
 
-/* ============================================================
-   BUTTONS chung
-   ============================================================ */
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  transition: all 0.2s ease;
-  color: var(--text-main);
-}
+/* BUTTONS */
+button { font-family: inherit; cursor: pointer; border: none; border-radius: 10px; font-weight: 600; transition: all 0.2s ease; color: var(--text-main); }
 button:active { transform: scale(0.97); }
-
-.btn {
-  padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-glass);
-  font-size: 14px;
-}
+.btn { padding: 10px 16px; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border-glass); font-size: 14px; }
 .btn:hover { background: rgba(255, 255, 255, 0.12); }
 .btn-primary { background: var(--accent-grad); border: none; }
 .btn-primary:hover { filter: brightness(1.1); }
 
-/* ============================================================
-   SECTION TITLE
-   ============================================================ */
-.section {
-  padding: 20px 24px;
-  margin-bottom: 20px;
-}
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-.section-title {
-  font-size: 15px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-main);
-}
+/* SECTION */
+.section { padding: 20px 24px; margin-bottom: 20px; }
+.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.section-title { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; color: var(--text-main); }
 
-/* ============================================================
-   SETTINGS PANEL
-   ============================================================ */
-#settings-toggle {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+/* SETTINGS */
+#settings-toggle { display: flex; align-items: center; gap: 8px; }
 .chevron { transition: transform 0.3s ease; }
 .chevron.open { transform: rotate(180deg); }
-
-#settings-body {
-  display: grid;
-  gap: 18px;
-  overflow: hidden;
-  transition: max-height 0.35s ease, opacity 0.3s ease;
-  max-height: 1500px;
-  opacity: 1;
-}
-#settings-body.collapsed {
-  max-height: 0;
-  opacity: 0;
-  margin-top: -18px;
-}
+#settings-body { display: grid; gap: 18px; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; max-height: 1500px; opacity: 1; }
+#settings-body.collapsed { max-height: 0; opacity: 0; margin-top: -18px; }
 
 .field { display: grid; gap: 6px; }
-.field label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-dim);
-}
+.field label { font-size: 13px; font-weight: 600; color: var(--text-dim); }
 
 input[type="password"], input[type="text"], select {
-  width: 100%;
-  padding: 11px 14px;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--border-glass);
-  border-radius: 10px;
-  color: var(--text-main);
-  font-family: inherit;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.2s;
+  width: 100%; padding: 11px 14px; background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-glass); border-radius: 10px; color: var(--text-main);
+  font-family: inherit; font-size: 14px; outline: none; transition: border-color 0.2s;
 }
 input:focus, select:focus { border-color: var(--accent-1); }
 select option { background: var(--bg-panel-solid); }
 
-.input-group { display: flex; gap: 8px; }
-.input-group input { flex: 1; }
+.input-group { display: flex; gap: 8px; flex-wrap: wrap; }
+.input-group input { flex: 1; min-width: 140px; }
 
 .hint { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
 
 .badge {
-  display: inline-block;
-  padding: 5px 12px;
-  background: rgba(34, 197, 94, 0.15);
-  color: var(--success);
-  border: 1px solid rgba(34, 197, 94, 0.3);
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
+  display: inline-block; padding: 5px 12px; background: rgba(34, 197, 94, 0.15);
+  color: var(--success); border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 20px; font-size: 12px; font-weight: 600;
 }
-
 #key-status { font-size: 13px; font-weight: 600; min-height: 18px; }
 
-/* Slider */
+/* SLIDER */
 .slider-wrap { display: flex; align-items: center; gap: 14px; }
 input[type="range"] {
-  flex: 1;
-  -webkit-appearance: none;
-  appearance: none;
-  height: 6px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.15);
-  outline: none;
+  flex: 1; -webkit-appearance: none; appearance: none; height: 6px;
+  border-radius: 3px; background: rgba(255, 255, 255, 0.15); outline: none;
 }
 input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: var(--accent-grad);
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(168, 85, 247, 0.5);
+  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--accent-grad); cursor: pointer; box-shadow: 0 2px 8px rgba(168, 85, 247, 0.5);
 }
 input[type="range"]::-moz-range-thumb {
-  width: 18px; height: 18px;
-  border: none;
-  border-radius: 50%;
-  background: var(--accent-2);
-  cursor: pointer;
+  width: 18px; height: 18px; border: none; border-radius: 50%; background: var(--accent-2); cursor: pointer;
 }
-.slider-val {
-  min-width: 46px;
-  text-align: center;
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--accent-1);
-}
+.slider-val { min-width: 46px; text-align: center; font-weight: 700; font-size: 14px; color: var(--accent-1); }
 
-/* Checkbox */
-.checkbox-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  user-select: none;
-}
+/* CHECKBOX */
+.checkbox-wrap { display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
 .checkbox-wrap input { width: 18px; height: 18px; accent-color: var(--accent-2); cursor: pointer; }
 
-/* ============================================================
-   MODE SELECTOR
-   ============================================================ */
-.mode-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
+/* MODE */
+.mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .mode-btn {
-  padding: 18px;
-  font-size: 15px;
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.04);
-  border: 2px solid var(--border-glass);
-  border-radius: 14px;
+  padding: 18px; font-size: 15px; font-weight: 700; background: rgba(255, 255, 255, 0.04);
+  border: 2px solid var(--border-glass); border-radius: 14px;
 }
 .mode-btn:hover { border-color: rgba(255, 255, 255, 0.2); }
-.mode-btn.active {
-  background: var(--accent-grad);
-  border-color: transparent;
-  box-shadow: 0 6px 24px rgba(168, 85, 247, 0.4);
-}
+.mode-btn.active { background: var(--accent-grad); border-color: transparent; box-shadow: 0 6px 24px rgba(168, 85, 247, 0.4); }
 
-/* ============================================================
-   RECORDING PANEL
-   ============================================================ */
+/* RECORDING */
 .record-panel { text-align: center; }
-
 .mic-btn {
-  width: 110px; height: 110px;
-  border-radius: 50%;
-  background: var(--accent-grad);
-  font-size: 44px;
-  display: grid;
-  place-items: center;
-  margin: 10px auto 20px;
-  box-shadow: 0 8px 30px rgba(79, 140, 255, 0.4);
-  position: relative;
+  width: 110px; height: 110px; border-radius: 50%; background: var(--accent-grad);
+  font-size: 44px; display: grid; place-items: center; margin: 10px auto 20px;
+  box-shadow: 0 8px 30px rgba(79, 140, 255, 0.4); position: relative;
 }
-.mic-btn.recording {
-  background: linear-gradient(135deg, #ff3b3b, #ff0055);
-  animation: pulse 1.4s infinite;
-}
+.mic-btn.recording { background: linear-gradient(135deg, #ff3b3b, #ff0055); animation: pulse 1.4s infinite; }
+.mic-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 @keyframes pulse {
   0%   { box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.6); }
   70%  { box-shadow: 0 0 0 24px rgba(255, 59, 59, 0); }
   100% { box-shadow: 0 0 0 0 rgba(255, 59, 59, 0); }
 }
 
-/* Waveform - 5 thanh CSS animation */
-.waveform {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  height: 44px;
-  margin-bottom: 14px;
-}
+.waveform { display: none; justify-content: center; align-items: center; gap: 5px; height: 44px; margin-bottom: 14px; }
 .waveform.active { display: flex; }
-.waveform .bar {
-  width: 6px;
-  border-radius: 3px;
-  background: var(--accent-grad);
-  animation: wave 1s ease-in-out infinite;
-}
+.waveform .bar { width: 6px; border-radius: 3px; background: var(--accent-grad); animation: wave 1s ease-in-out infinite; }
 .waveform .bar:nth-child(1) { animation-delay: 0s; }
 .waveform .bar:nth-child(2) { animation-delay: 0.2s; }
 .waveform .bar:nth-child(3) { animation-delay: 0.4s; }
 .waveform .bar:nth-child(4) { animation-delay: 0.6s; }
 .waveform .bar:nth-child(5) { animation-delay: 0.8s; }
-@keyframes wave {
-  0%, 100% { height: 12px; }
-  50%      { height: 40px; }
-}
+@keyframes wave { 0%, 100% { height: 12px; } 50% { height: 40px; } }
 
-/* Status bar */
 .status-bar {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-dim);
-  min-height: 40px;
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.3); border-radius: 30px; font-size: 14px;
+  font-weight: 600; color: var(--text-dim); min-height: 40px;
 }
+.mode-note { font-size: 12px; color: var(--text-dim); margin-top: 10px; }
 
-/* ============================================================
-   RESULTS PANEL - 2 cột
-   ============================================================ */
-.results-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
+/* RESULTS */
+.results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .result-col { padding: 18px; }
-.result-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
+.result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .result-header .title { font-size: 14px; font-weight: 700; }
 .result-actions { display: flex; gap: 6px; }
-.mini-btn {
-  padding: 6px 10px;
-  font-size: 12px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-glass);
-  border-radius: 8px;
-}
+.mini-btn { padding: 6px 10px; font-size: 12px; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border-glass); border-radius: 8px; }
 .mini-btn:hover { background: rgba(255, 255, 255, 0.14); }
 
-.panel-content {
-  height: 300px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-right: 4px;
-}
+.panel-content { height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 4px; }
 .panel-content::-webkit-scrollbar { width: 6px; }
-.panel-content::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 3px;
-}
+.panel-content::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }
 
-.entry {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--border-glass);
-  border-radius: 10px;
-  padding: 10px 12px;
-  animation: fadeIn 0.3s ease;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.entry-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 5px;
-}
+.entry { background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-glass); border-radius: 10px; padding: 10px 12px; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.entry-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
 .entry-time { font-size: 11px; color: var(--text-dim); }
-.entry-play {
-  padding: 3px 9px;
-  font-size: 11px;
-  background: rgba(79, 140, 255, 0.18);
-  border: 1px solid rgba(79, 140, 255, 0.3);
-  border-radius: 6px;
-  color: var(--accent-1);
-}
+.entry-play { padding: 3px 9px; font-size: 11px; background: rgba(79, 140, 255, 0.18); border: 1px solid rgba(79, 140, 255, 0.3); border-radius: 6px; color: var(--accent-1); }
 .entry-text { font-size: 14px; line-height: 1.5; }
-.empty-hint {
-  color: var(--text-dim);
-  font-size: 13px;
-  text-align: center;
-  margin: auto;
-  padding: 40px 10px;
-}
+.empty-hint { color: var(--text-dim); font-size: 13px; text-align: center; margin: auto; padding: 40px 10px; }
 
-/* ============================================================
-   TTS CONTROLS
-   ============================================================ */
-.tts-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-}
+/* TTS */
+.tts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .tts-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
 
-/* ============================================================
-   TOAST
-   ============================================================ */
-#toast-container {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 1000;
-}
+/* TOAST */
+#toast-container { position: fixed; bottom: 24px; right: 24px; left: 24px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; align-items: flex-end; }
 .toast {
-  padding: 14px 20px;
-  background: var(--bg-panel-solid);
-  border: 1px solid var(--border-glass);
-  border-left: 4px solid var(--accent-1);
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  font-size: 14px;
-  font-weight: 500;
-  max-width: 320px;
-  animation: slideIn 0.3s ease;
+  padding: 14px 20px; background: var(--bg-panel-solid); border: 1px solid var(--border-glass);
+  border-left: 4px solid var(--accent-1); border-radius: 10px; box-shadow: var(--shadow);
+  font-size: 14px; font-weight: 500; max-width: 340px; animation: slideIn 0.3s ease;
 }
 .toast.error { border-left-color: var(--danger); }
 .toast.warn  { border-left-color: var(--warning); }
 .toast.hide  { animation: slideOut 0.3s ease forwards; }
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(40px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes slideOut {
-  to { opacity: 0; transform: translateX(40px); }
-}
+@keyframes slideIn { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideOut { to { opacity: 0; transform: translateX(40px); } }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
-footer {
-  text-align: center;
-  font-size: 12px;
-  color: var(--text-dim);
-  padding: 20px;
-  line-height: 1.7;
-}
+/* FOOTER */
+footer { text-align: center; font-size: 12px; color: var(--text-dim); padding: 20px; line-height: 1.7; }
 footer a { color: var(--accent-1); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 
-/* ============================================================
-   RESPONSIVE - Mobile stack dọc
-   ============================================================ */
+/* RESPONSIVE */
 @media (max-width: 720px) {
   .mode-grid, .results-grid, .tts-grid { grid-template-columns: 1fr; }
   .app-title h1 { font-size: 20px; }
@@ -533,12 +274,8 @@ footer a:hover { text-decoration: underline; }
           <option value="meta-llama/llama-4-scout-17b-16e-instruct">llama-4-scout-17b ⚡ Fast — cân bằng tốc độ/chất lượng</option>
           <option value="llama-3.1-8b-instant">llama-3.1-8b-instant 🔋 Light — nhẹ, nhanh nhất, tiết kiệm quota</option>
         </select>
-        <div class="hint">
-          ★ 70b: dịch mượt, tự nhiên nhất · ⚡ scout-17b: nhanh vừa · 🔋 8b: nhẹ nhất cho câu ngắn.
-        </div>
-        <div style="margin-top:8px;">
-          <span class="badge">✅ Optimal config as of July 2026</span>
-        </div>
+        <div class="hint">★ 70b: dịch mượt, tự nhiên nhất · ⚡ scout-17b: nhanh vừa · 🔋 8b: nhẹ nhất cho câu ngắn.</div>
+        <div style="margin-top:8px;"><span class="badge">✅ Optimal config as of July 2026</span></div>
       </div>
 
       <!-- Chunk duration slider -->
@@ -548,7 +285,7 @@ footer a:hover { text-decoration: underline; }
           <input type="range" id="chunk-duration" min="2" max="5" step="1" value="3">
           <span class="slider-val"><span id="chunk-val">3</span>s</span>
         </div>
-        <div class="hint">Đoạn ngắn = phản hồi nhanh hơn nhưng dễ cắt câu. 3s là cân bằng tốt.</div>
+        <div class="hint">App tự ghi trọn từng đoạn theo thời lượng này rồi gửi đi (đảm bảo audio hợp lệ, tránh lỗi 400).</div>
       </div>
 
       <!-- Auto-read checkbox -->
@@ -563,9 +300,7 @@ footer a:hover { text-decoration: underline; }
 
   <!-- ========== MODE SELECTOR ========== -->
   <div class="section glass">
-    <div class="section-header">
-      <div class="section-title">🔀 Chọn chế độ dịch</div>
-    </div>
+    <div class="section-header"><div class="section-title">🔀 Chọn chế độ dịch</div></div>
     <div class="mode-grid">
       <button class="mode-btn active" data-mode="en2vi">🇺🇸 English → 🇻🇳 Tiếng Việt</button>
       <button class="mode-btn" data-mode="vi2en">🇻🇳 Tiếng Việt → 🇺🇸 English</button>
@@ -574,30 +309,20 @@ footer a:hover { text-decoration: underline; }
 
   <!-- ========== RECORDING PANEL ========== -->
   <div class="section glass record-panel">
-    <div class="section-header">
-      <div class="section-title">🎙️ Ghi âm</div>
-    </div>
-
+    <div class="section-header"><div class="section-title">🎙️ Ghi âm</div></div>
     <button class="mic-btn" id="mic-btn">🎙</button>
-
-    <!-- Waveform animation -->
     <div class="waveform" id="waveform">
       <div class="bar"></div><div class="bar"></div><div class="bar"></div>
       <div class="bar"></div><div class="bar"></div>
     </div>
-
-    <div>
-      <span class="status-bar" id="status-bar">⏸ Sẵn sàng — nhấn nút micro để bắt đầu</span>
-    </div>
+    <div><span class="status-bar" id="status-bar">⏸ Sẵn sàng — nhấn nút micro để bắt đầu</span></div>
+    <div class="mode-note">💡 Nhấn 1 lần để bắt đầu, app tự ghi & dịch từng đoạn liên tục. Nhấn lại để dừng.</div>
   </div>
 
   <!-- ========== RESULTS PANEL ========== -->
   <div class="section glass">
-    <div class="section-header">
-      <div class="section-title">📄 Kết quả</div>
-    </div>
+    <div class="section-header"><div class="section-title">📄 Kết quả</div></div>
     <div class="results-grid">
-      <!-- Cột trái: văn bản gốc -->
       <div class="result-col glass">
         <div class="result-header">
           <div class="title">🎤 Văn bản gốc</div>
@@ -610,8 +335,6 @@ footer a:hover { text-decoration: underline; }
           <div class="empty-hint">Chưa có văn bản. Bắt đầu ghi âm để phiên âm...</div>
         </div>
       </div>
-
-      <!-- Cột phải: bản dịch -->
       <div class="result-col glass">
         <div class="result-header">
           <div class="title">🌐 Bản dịch</div>
@@ -629,19 +352,12 @@ footer a:hover { text-decoration: underline; }
 
   <!-- ========== TTS CONTROLS ========== -->
   <div class="section glass">
-    <div class="section-header">
-      <div class="section-title">🔊 Điều khiển giọng đọc (Text-to-Speech)</div>
-    </div>
+    <div class="section-header"><div class="section-title">🔊 Điều khiển giọng đọc (Text-to-Speech)</div></div>
     <div class="tts-grid">
       <div class="field">
         <label>Giọng đọc (theo ngôn ngữ đích)</label>
-        <!-- Hai select, chỉ hiện cái phù hợp với mode hiện tại -->
-        <select id="voice-en">
-          <option value="">Đang tải giọng tiếng Anh...</option>
-        </select>
-        <select id="voice-vi" style="display:none;">
-          <option value="">Đang tải giọng tiếng Việt...</option>
-        </select>
+        <select id="voice-en"><option value="">Đang tải giọng tiếng Anh...</option></select>
+        <select id="voice-vi" style="display:none;"><option value="">Đang tải giọng tiếng Việt...</option></select>
       </div>
       <div class="field">
         <label>Tốc độ (Rate)</label>
@@ -671,87 +387,61 @@ footer a:hover { text-decoration: underline; }
 
 </div>
 
-<!-- Toast container -->
 <div id="toast-container"></div>
 
 <script>
 /* ============================================================
    VoiceBridge AI Translator - JavaScript thuần ES6+
+   PHIÊN BẢN ĐÃ SỬA LỖI 400: dùng cơ chế "ghi trọn đoạn rồi gửi"
+   thay vì chia chunk theo timeslice → mỗi file audio luôn hợp lệ.
    ============================================================ */
 
-// ---------- Cấu hình localStorage keys ----------
-const LS = {
-  key:      'vba_key',
-  stt:      'vba_stt',
-  trans:    'vba_trans',
-  chunk:    'vba_chunk',
-  autoread: 'vba_autoread',
-  rate:     'vba_rate',
-  pitch:    'vba_pitch'
-};
+// ---------- localStorage keys ----------
+const LS = { key:'vba_key', stt:'vba_stt', trans:'vba_trans', chunk:'vba_chunk',
+             autoread:'vba_autoread', rate:'vba_rate', pitch:'vba_pitch' };
 
 // ---------- Trạng thái toàn cục ----------
-let currentMode = 'en2vi';      // Chế độ dịch hiện tại
-let isRecording = false;        // Cờ đang ghi âm
-let isProcessing = false;       // Cờ đang xử lý (STT + dịch)
-let mediaRecorder = null;       // Đối tượng MediaRecorder
-let mediaStream = null;         // Stream microphone
-let chunkQueue = [];            // Hàng đợi các chunk chờ xử lý
-let voices = [];                // Danh sách giọng TTS
+let currentMode = 'en2vi';
+let isRecording = false;     // Người dùng đang bật chế độ ghi (vòng lặp)
+let isProcessing = false;    // Đang gọi API STT + dịch
+let mediaRecorder = null;
+let mediaStream = null;
+let recordedChunks = [];     // Gom dữ liệu của MỘT đoạn hoàn chỉnh
+let voices = [];
+let recordMime = 'audio/webm';   // mimeType thực tế của trình duyệt
+let recordExt = 'webm';          // đuôi file khớp mimeType
+let segmentTimer = null;         // Bộ đếm giờ cho mỗi đoạn ghi
 
-// ---------- Shortcut lấy DOM ----------
 const $ = (id) => document.getElementById(id);
 
 /* ============================================================
-   1. QUẢN LÝ API KEY (mã hóa base64)
+   1. API KEY
    ============================================================ */
-// Lấy key đã giải mã từ input hoặc localStorage
-function getKey() {
-  return $('api-key').value.trim();
-}
+function getKey() { return $('api-key').value.trim(); }
 
-// Lưu key mã hóa btoa vào localStorage
 function saveKey() {
   const k = getKey();
   if (k) localStorage.setItem(LS.key, btoa(k));
   else localStorage.removeItem(LS.key);
 }
 
-// Test API key bằng cách gọi GET /models
 async function testKey() {
   const k = getKey();
   const status = $('key-status');
-  if (!k) {
-    status.textContent = '⚠️ Vui lòng nhập API Key trước.';
-    status.style.color = 'var(--warning)';
-    return;
-  }
-  status.textContent = '⏳ Đang kiểm tra...';
-  status.style.color = 'var(--text-dim)';
+  if (!k) { status.textContent = '⚠️ Vui lòng nhập API Key trước.'; status.style.color = 'var(--warning)'; return; }
+  status.textContent = '⏳ Đang kiểm tra...'; status.style.color = 'var(--text-dim)';
   try {
     const res = await fetch('https://api.groq.com/openai/v1/models', {
-      method: 'GET',
-      headers: { Authorization: 'Bearer ' + k }
+      method: 'GET', headers: { Authorization: 'Bearer ' + k }
     });
-    if (res.ok) {
-      status.textContent = '✅ API Key hợp lệ!';
-      status.style.color = 'var(--success)';
-      saveKey();
-    } else if (res.status === 401) {
-      status.textContent = '❌ API Key không hợp lệ (401).';
-      status.style.color = 'var(--danger)';
-    } else {
-      status.textContent = '❌ Lỗi: HTTP ' + res.status;
-      status.style.color = 'var(--danger)';
-    }
-  } catch (e) {
-    status.textContent = '📡 Lỗi kết nối internet.';
-    status.style.color = 'var(--danger)';
-  }
+    if (res.ok) { status.textContent = '✅ API Key hợp lệ!'; status.style.color = 'var(--success)'; saveKey(); }
+    else if (res.status === 401) { status.textContent = '❌ API Key không hợp lệ (401).'; status.style.color = 'var(--danger)'; }
+    else { status.textContent = '❌ Lỗi: HTTP ' + res.status; status.style.color = 'var(--danger)'; }
+  } catch (e) { status.textContent = '📡 Lỗi kết nối internet.'; status.style.color = 'var(--danger)'; }
 }
 
 /* ============================================================
-   2. TOAST NOTIFICATION - tự ẩn sau 4s
+   2. TOAST
    ============================================================ */
 function showToast(message, type = 'info') {
   const container = $('toast-container');
@@ -759,143 +449,144 @@ function showToast(message, type = 'info') {
   toast.className = 'toast ' + (type === 'error' ? 'error' : type === 'warn' ? 'warn' : '');
   toast.textContent = message;
   container.appendChild(toast);
-  // Tự ẩn sau 4 giây
-  setTimeout(() => {
-    toast.classList.add('hide');
-    setTimeout(() => toast.remove(), 300);
-  }, 4000);
+  setTimeout(() => { toast.classList.add('hide'); setTimeout(() => toast.remove(), 300); }, 4000);
 }
 
-// Xử lý lỗi HTTP chung
-function handleHttpError(status) {
+// Xử lý lỗi HTTP chung. Với 400 hiển thị chi tiết message từ server nếu có.
+function handleHttpError(status, detail) {
   if (status === 429) showToast('⚠️ Rate limit! Vui lòng chờ vài giây.', 'warn');
   else if (status === 401) showToast('❌ API Key không hợp lệ. Kiểm tra lại Settings.', 'error');
+  else if (status === 400) showToast('⚠️ Lỗi 400: ' + (detail || 'Audio không hợp lệ hoặc quá ngắn. Hãy nói dài hơn.'), 'error');
   else showToast('❌ Lỗi máy chủ: HTTP ' + status, 'error');
 }
 
 /* ============================================================
-   3. GHI ÂM - MediaRecorder
+   3. PHÁT HIỆN MIMETYPE HỖ TRỢ (quan trọng cho điện thoại)
+   ============================================================ */
+// Điện thoại có thể chỉ hỗ trợ mp4/aac thay vì webm.
+// Ta chọn định dạng phù hợp & đặt đuôi file khớp để tránh lỗi 400.
+function pickMimeType() {
+  const candidates = [
+    { mime: 'audio/webm;codecs=opus', ext: 'webm' },
+    { mime: 'audio/webm',             ext: 'webm' },
+    { mime: 'audio/mp4',              ext: 'm4a'  },
+    { mime: 'audio/mpeg',             ext: 'mp3'  },
+    { mime: 'audio/ogg;codecs=opus',  ext: 'ogg'  }
+  ];
+  for (const c of candidates) {
+    if (typeof MediaRecorder !== 'undefined' &&
+        MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(c.mime)) {
+      return c;
+    }
+  }
+  return { mime: '', ext: 'webm' }; // để trình duyệt tự chọn mặc định
+}
+
+/* ============================================================
+   4. GHI ÂM - Cơ chế "ghi trọn đoạn rồi gửi" (loop)
    ============================================================ */
 async function startRecording() {
   const k = getKey();
-  if (!k) {
-    showToast('⚠️ Vui lòng nhập & test API Key trong Settings.', 'warn');
-    return;
-  }
+  if (!k) { showToast('⚠️ Vui lòng nhập & test API Key trong Settings.', 'warn'); return; }
+
   try {
-    // Xin quyền truy cập microphone
     mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
   } catch (e) {
-    showToast('🎤 Không truy cập được microphone. Cần HTTPS hoặc localhost.', 'error');
+    showToast('🎤 Không truy cập được microphone. Cần HTTPS và cấp quyền.', 'error');
     return;
   }
 
-  const chunkDuration = parseInt($('chunk-duration').value, 10);
-  // Chọn mimeType hỗ trợ (Chrome/Edge dùng webm/opus)
-  let options = {};
-  if (MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) {
-    options.mimeType = 'audio/webm;codecs=opus';
-  } else if (MediaRecorder.isTypeSupported('audio/webm')) {
-    options.mimeType = 'audio/webm';
-  }
-  mediaRecorder = new MediaRecorder(mediaStream, options);
-
-  // Mỗi khi có dữ liệu (theo timeslice) → tạo 1 segment và xử lý
-  mediaRecorder.ondataavailable = (event) => {
-    if (event.data && event.data.size > 0) {
-      // Mỗi lần ondataavailable là 1 segment độc lập → đưa vào xử lý
-      const blob = new Blob([event.data], { type: mediaRecorder.mimeType || 'audio/webm' });
-      enqueueChunk(blob);
-    }
-  };
-
-  // timeslice = chunkDuration * 1000ms → trình duyệt gọi ondataavailable định kỳ
-  mediaRecorder.start(chunkDuration * 1000);
+  // Chọn định dạng phù hợp với trình duyệt/điện thoại
+  const picked = pickMimeType();
+  recordMime = picked.mime;
+  recordExt = picked.ext;
 
   isRecording = true;
   updateRecordingUI(true);
   setStatus('⏺ Đang ghi âm');
+
+  // Bắt đầu vòng lặp ghi từng đoạn
+  recordOneSegment();
+}
+
+// Ghi MỘT đoạn hoàn chỉnh với thời lượng = chunkDuration
+function recordOneSegment() {
+  if (!isRecording || !mediaStream) return;
+
+  recordedChunks = [];
+  try {
+    // Tạo MediaRecorder mới cho mỗi đoạn → file luôn có header đầy đủ, hợp lệ
+    mediaRecorder = recordMime
+      ? new MediaRecorder(mediaStream, { mimeType: recordMime })
+      : new MediaRecorder(mediaStream);
+  } catch (e) {
+    // Nếu mimeType lỗi, thử tạo mặc định
+    try { mediaRecorder = new MediaRecorder(mediaStream); recordMime = ''; }
+    catch (e2) { showToast('❌ Trình duyệt không hỗ trợ ghi âm.', 'error'); stopRecording(); return; }
+  }
+
+  // Gom dữ liệu của đoạn
+  mediaRecorder.ondataavailable = (event) => {
+    if (event.data && event.data.size > 0) recordedChunks.push(event.data);
+  };
+
+  // Khi đoạn kết thúc (stop) → ghép thành 1 file hoàn chỉnh & gửi đi
+  mediaRecorder.onstop = () => {
+    if (recordedChunks.length > 0) {
+      const type = mediaRecorder.mimeType || recordMime || 'audio/webm';
+      const blob = new Blob(recordedChunks, { type });
+      // Chỉ gửi nếu file đủ lớn (bỏ đoạn quá ngắn/rỗng → tránh lỗi 400)
+      if (blob.size > 2000) {
+        processChunk(blob);
+      }
+    }
+    // Nếu vẫn đang ghi → tiếp tục đoạn kế tiếp (vòng lặp)
+    if (isRecording) recordOneSegment();
+  };
+
+  // Bắt đầu ghi (KHÔNG dùng timeslice → 1 file trọn vẹn)
+  mediaRecorder.start();
+
+  // Sau chunkDuration giây thì dừng đoạn này
+  const chunkDuration = parseInt($('chunk-duration').value, 10) || 3;
+  segmentTimer = setTimeout(() => {
+    if (mediaRecorder && mediaRecorder.state === 'recording') mediaRecorder.stop();
+  }, chunkDuration * 1000);
 }
 
 function stopRecording() {
-  if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+  isRecording = false;
+  // Hủy bộ đếm giờ đoạn
+  if (segmentTimer) { clearTimeout(segmentTimer); segmentTimer = null; }
+  // Dừng recorder hiện tại (sẽ kích hoạt onstop → gửi đoạn cuối)
+  if (mediaRecorder && mediaRecorder.state === 'recording') {
     mediaRecorder.stop();
   }
-  // Tắt tất cả track của microphone
-  if (mediaStream) {
-    mediaStream.getTracks().forEach(t => t.stop());
-    mediaStream = null;
-  }
-  isRecording = false;
+  // Tắt microphone
+  if (mediaStream) { mediaStream.getTracks().forEach(t => t.stop()); mediaStream = null; }
   updateRecordingUI(false);
-  // Nếu không còn gì trong queue → set trạng thái sẵn sàng
-  if (chunkQueue.length === 0 && !isProcessing) {
-    setStatus('⏸ Sẵn sàng — nhấn nút micro để bắt đầu');
-  }
+  if (!isProcessing) setStatus('⏸ Sẵn sàng — nhấn nút micro để bắt đầu');
 }
 
-// Cập nhật giao diện khi ghi/dừng
 function updateRecordingUI(recording) {
-  const mic = $('mic-btn');
-  const wave = $('waveform');
-  if (recording) {
-    mic.classList.add('recording');
-    mic.textContent = '⏹';
-    wave.classList.add('active');
-  } else {
-    mic.classList.remove('recording');
-    mic.textContent = '🎙';
-    wave.classList.remove('active');
-  }
+  const mic = $('mic-btn'), wave = $('waveform');
+  if (recording) { mic.classList.add('recording'); mic.textContent = '⏹'; wave.classList.add('active'); }
+  else { mic.classList.remove('recording'); mic.textContent = '🎙'; wave.classList.remove('active'); }
 }
 
-// Cập nhật status bar
-function setStatus(text) {
-  $('status-bar').textContent = text;
-}
-
-/* ============================================================
-   4. HÀNG ĐỢI XỬ LÝ CHUNK
-   ============================================================ */
-// Đưa chunk vào hàng đợi, xử lý tuần tự
-function enqueueChunk(blob) {
-  chunkQueue.push(blob);
-  processQueue();
-}
-
-// Xử lý từng chunk trong hàng đợi (nếu đang bận thì chờ)
-async function processQueue() {
-  if (isProcessing) return;        // Đang xử lý chunk khác → chờ
-  if (chunkQueue.length === 0) return;
-
-  isProcessing = true;
-  const blob = chunkQueue.shift();
-  await processChunk(blob);
-  isProcessing = false;
-
-  // Xử lý tiếp chunk còn lại
-  if (chunkQueue.length > 0) {
-    processQueue();
-  } else if (!isRecording) {
-    setStatus('✅ Hoàn thành');
-    setTimeout(() => {
-      if (!isRecording && !isProcessing && chunkQueue.length === 0)
-        setStatus('⏸ Sẵn sàng — nhấn nút micro để bắt đầu');
-    }, 1500);
-  }
-}
+function setStatus(text) { $('status-bar').textContent = text; }
 
 /* ============================================================
    5. PROCESS CHUNK - Phiên âm (STT)
    ============================================================ */
 async function processChunk(audioBlob) {
+  isProcessing = true;
   setStatus('🔄 Đang phiên âm...');
 
-  // Tạo FormData gửi lên Groq Whisper
   const formData = new FormData();
-  formData.append('file', audioBlob, 'audio.webm');
+  // Đặt tên file khớp với định dạng thực tế → tránh lỗi 400 do sai extension
+  formData.append('file', audioBlob, 'audio.' + recordExt);
   formData.append('model', $('stt-model').value);
-  // Ngôn ngữ nguồn tương ứng với mode
   formData.append('language', currentMode === 'en2vi' ? 'en' : 'vi');
   formData.append('response_format', 'json');
 
@@ -907,7 +598,12 @@ async function processChunk(audioBlob) {
     });
 
     if (!res.ok) {
-      handleHttpError(res.status);
+      // Đọc chi tiết lỗi từ server để hiển thị (nhất là 400)
+      let detail = '';
+      try { const err = await res.json(); detail = err?.error?.message || ''; } catch (e) {}
+      handleHttpError(res.status, detail);
+      isProcessing = false;
+      if (!isRecording) setStatus('⏸ Sẵn sàng — nhấn nút micro để bắt đầu');
       return;
     }
 
@@ -915,31 +611,37 @@ async function processChunk(audioBlob) {
     const text = (data.text || '').trim();
 
     // Bỏ qua đoạn im lặng / rỗng
-    if (!text || text.length <= 1) return;
+    if (!text || text.length <= 1) {
+      isProcessing = false;
+      if (!isRecording) setStatus('⏸ Sẵn sàng — nhấn nút micro để bắt đầu');
+      return;
+    }
 
-    // Hiển thị văn bản gốc
     addEntry('original-panel', text, currentMode === 'en2vi' ? 'en' : 'vi');
-
-    // Tiến hành dịch
     await translateText(text);
 
   } catch (e) {
     showToast('📡 Lỗi kết nối internet.', 'error');
+  } finally {
+    isProcessing = false;
+    if (!isRecording) {
+      setStatus('✅ Hoàn thành');
+      setTimeout(() => { if (!isRecording && !isProcessing) setStatus('⏸ Sẵn sàng — nhấn nút micro để bắt đầu'); }, 1500);
+    } else {
+      setStatus('⏺ Đang ghi âm');
+    }
   }
 }
 
 /* ============================================================
-   6. TRANSLATE TEXT - Dịch (Chat Completions)
+   6. TRANSLATE TEXT
    ============================================================ */
 async function translateText(text) {
   setStatus('🌐 Đang dịch...');
-
-  // Xác định ngôn ngữ nguồn / đích theo mode
   const sourceLang = currentMode === 'en2vi' ? 'English' : 'Vietnamese';
   const targetLang = currentMode === 'en2vi' ? 'Vietnamese' : 'English';
   const targetCode = currentMode === 'en2vi' ? 'vi' : 'en';
 
-  // System prompt yêu cầu chỉ trả về bản dịch
   const systemPrompt =
     `You are a professional translator specializing in English-Vietnamese translation. ` +
     `Translate the following ${sourceLang} text to ${targetLang}. ` +
@@ -948,10 +650,7 @@ async function translateText(text) {
   try {
     const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + getKey(),
-        'Content-Type': 'application/json'
-      },
+      headers: { Authorization: 'Bearer ' + getKey(), 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: $('trans-model').value,
         messages: [
@@ -964,7 +663,9 @@ async function translateText(text) {
     });
 
     if (!res.ok) {
-      handleHttpError(res.status);
+      let detail = '';
+      try { const err = await res.json(); detail = err?.error?.message || ''; } catch (e) {}
+      handleHttpError(res.status, detail);
       return;
     }
 
@@ -972,15 +673,8 @@ async function translateText(text) {
     const translated = (data.choices?.[0]?.message?.content || '').trim();
     if (!translated) return;
 
-    // Hiển thị bản dịch kèm timestamp
     addEntry('translation-panel', translated, targetCode);
-
-    setStatus('✅ Hoàn thành');
-
-    // Nếu bật auto-read → tự đọc
-    if ($('auto-read').checked) {
-      speakText(translated, targetCode);
-    }
+    if ($('auto-read').checked) speakText(translated, targetCode);
 
   } catch (e) {
     showToast('📡 Lỗi kết nối internet.', 'error');
@@ -988,240 +682,142 @@ async function translateText(text) {
 }
 
 /* ============================================================
-   7. HIỂN THỊ ENTRY vào panel + auto-scroll
+   7. HIỂN THỊ ENTRY + auto-scroll
    ============================================================ */
-function nowTime() {
-  // Định dạng HH:MM:SS
-  const d = new Date();
-  return d.toTimeString().split(' ')[0];
-}
+function nowTime() { return new Date().toTimeString().split(' ')[0]; }
 
 function addEntry(panelId, text, lang) {
   const panel = $(panelId);
-  // Xóa gợi ý rỗng nếu có
   const hint = panel.querySelector('.empty-hint');
   if (hint) hint.remove();
 
-  const entry = document.createElement('div');
-  entry.className = 'entry';
-
-  const top = document.createElement('div');
-  top.className = 'entry-top';
-
-  const time = document.createElement('span');
-  time.className = 'entry-time';
-  time.textContent = '🕐 ' + nowTime();
-
-  const playBtn = document.createElement('button');
-  playBtn.className = 'entry-play';
-  playBtn.textContent = '▶ Đọc';
-  // Nút đọc entry với ngôn ngữ tương ứng
+  const entry = document.createElement('div'); entry.className = 'entry';
+  const top = document.createElement('div'); top.className = 'entry-top';
+  const time = document.createElement('span'); time.className = 'entry-time'; time.textContent = '🕐 ' + nowTime();
+  const playBtn = document.createElement('button'); playBtn.className = 'entry-play'; playBtn.textContent = '▶ Đọc';
   playBtn.onclick = () => speakText(text, lang);
-
-  top.appendChild(time);
-  top.appendChild(playBtn);
-
-  const body = document.createElement('div');
-  body.className = 'entry-text';
-  body.textContent = text;
-
-  entry.appendChild(top);
-  entry.appendChild(body);
+  top.appendChild(time); top.appendChild(playBtn);
+  const body = document.createElement('div'); body.className = 'entry-text'; body.textContent = text;
+  entry.appendChild(top); entry.appendChild(body);
   panel.appendChild(entry);
-
-  // Auto-scroll xuống cuối
   panel.scrollTop = panel.scrollHeight;
 }
 
-// Copy toàn bộ text trong panel
 function copyPanel(panelId) {
   const panel = $(panelId);
   const texts = [...panel.querySelectorAll('.entry-text')].map(e => e.textContent);
-  if (texts.length === 0) {
-    showToast('📋 Chưa có nội dung để copy.', 'warn');
-    return;
-  }
-  navigator.clipboard.writeText(texts.join('\n'))
-    .then(() => showToast('📋 Đã copy vào clipboard!'))
-    .catch(() => showToast('❌ Không copy được.', 'error'));
+  if (texts.length === 0) { showToast('📋 Chưa có nội dung để copy.', 'warn'); return; }
+  const joined = texts.join('\n');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(joined)
+      .then(() => showToast('📋 Đã copy vào clipboard!'))
+      .catch(() => fallbackCopy(joined));
+  } else fallbackCopy(joined);
+}
+// Copy dự phòng cho trình duyệt cũ / không có HTTPS clipboard
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); showToast('📋 Đã copy!'); }
+  catch (e) { showToast('❌ Không copy được.', 'error'); }
+  document.body.removeChild(ta);
 }
 
-// Xóa toàn bộ entry trong panel
 function clearPanel(panelId) {
   const panel = $(panelId);
   const hintText = panelId === 'original-panel'
-    ? 'Chưa có văn bản. Bắt đầu ghi âm để phiên âm...'
-    : 'Chưa có bản dịch.';
+    ? 'Chưa có văn bản. Bắt đầu ghi âm để phiên âm...' : 'Chưa có bản dịch.';
   panel.innerHTML = `<div class="empty-hint">${hintText}</div>`;
 }
 
 /* ============================================================
-   8. TEXT-TO-SPEECH - Web Speech API
+   8. TEXT-TO-SPEECH
    ============================================================ */
-// Load danh sách giọng nói, lọc theo tiếng Anh & tiếng Việt
 function loadVoices() {
   voices = window.speechSynthesis.getVoices();
-  const enSelect = $('voice-en');
-  const viSelect = $('voice-vi');
-  enSelect.innerHTML = '';
-  viSelect.innerHTML = '';
-
+  const enSelect = $('voice-en'), viSelect = $('voice-vi');
+  enSelect.innerHTML = ''; viSelect.innerHTML = '';
   const enVoices = voices.filter(v => v.lang.toLowerCase().startsWith('en'));
   const viVoices = voices.filter(v => v.lang.toLowerCase().startsWith('vi'));
 
-  // Populate dropdown tiếng Anh
-  if (enVoices.length === 0) {
-    enSelect.innerHTML = '<option value="">(Không có giọng tiếng Anh)</option>';
-  } else {
-    enVoices.forEach(v => {
-      const opt = document.createElement('option');
-      opt.value = v.name;
-      opt.textContent = `${v.name} (${v.lang})`;
-      enSelect.appendChild(opt);
-    });
-  }
+  if (enVoices.length === 0) enSelect.innerHTML = '<option value="">(Không có giọng tiếng Anh)</option>';
+  else enVoices.forEach(v => { const o = document.createElement('option'); o.value = v.name; o.textContent = `${v.name} (${v.lang})`; enSelect.appendChild(o); });
 
-  // Populate dropdown tiếng Việt
-  if (viVoices.length === 0) {
-    viSelect.innerHTML = '<option value="">(Không có giọng tiếng Việt — sẽ dùng mặc định)</option>';
-  } else {
-    viVoices.forEach(v => {
-      const opt = document.createElement('option');
-      opt.value = v.name;
-      opt.textContent = `${v.name} (${v.lang})`;
-      viSelect.appendChild(opt);
-    });
-  }
+  if (viVoices.length === 0) viSelect.innerHTML = '<option value="">(Không có giọng tiếng Việt — dùng mặc định)</option>';
+  else viVoices.forEach(v => { const o = document.createElement('option'); o.value = v.name; o.textContent = `${v.name} (${v.lang})`; viSelect.appendChild(o); });
 }
 
-// Phát âm text theo ngôn ngữ
 function speakText(text, lang) {
   if (!text) return;
-  // Dừng phát âm hiện tại trước khi phát cái mới
   window.speechSynthesis.cancel();
-
   const utter = new SpeechSynthesisUtterance(text);
   utter.rate = parseFloat($('tts-rate').value);
   utter.pitch = parseFloat($('tts-pitch').value);
-
-  // Chọn giọng theo ngôn ngữ + dropdown đang chọn
   let selectedName = '';
-  if (lang === 'en') {
-    utter.lang = 'en-US';
-    selectedName = $('voice-en').value;
-  } else {
-    utter.lang = 'vi-VN';
-    selectedName = $('voice-vi').value;
-  }
+  if (lang === 'en') { utter.lang = 'en-US'; selectedName = $('voice-en').value; }
+  else { utter.lang = 'vi-VN'; selectedName = $('voice-vi').value; }
   const voice = voices.find(v => v.name === selectedName);
   if (voice) utter.voice = voice;
-
   window.speechSynthesis.speak(utter);
 }
 
-// Đọc toàn bộ panel bản dịch (nối các entry lại)
 function readAllTranslation() {
   const panel = $('translation-panel');
   const texts = [...panel.querySelectorAll('.entry-text')].map(e => e.textContent);
-  if (texts.length === 0) {
-    showToast('🔊 Chưa có bản dịch để đọc.', 'warn');
-    return;
-  }
+  if (texts.length === 0) { showToast('🔊 Chưa có bản dịch để đọc.', 'warn'); return; }
   const targetCode = currentMode === 'en2vi' ? 'vi' : 'en';
   speakText(texts.join('. '), targetCode);
 }
 
 /* ============================================================
-   9. CHUYỂN ĐỔI DROPDOWN GIỌNG THEO MODE
+   9. DROPDOWN GIỌNG THEO MODE
    ============================================================ */
 function updateVoiceDropdownVisibility() {
   const targetCode = currentMode === 'en2vi' ? 'vi' : 'en';
-  if (targetCode === 'vi') {
-    $('voice-vi').style.display = 'block';
-    $('voice-en').style.display = 'none';
-  } else {
-    $('voice-en').style.display = 'block';
-    $('voice-vi').style.display = 'none';
-  }
+  if (targetCode === 'vi') { $('voice-vi').style.display = 'block'; $('voice-en').style.display = 'none'; }
+  else { $('voice-en').style.display = 'block'; $('voice-vi').style.display = 'none'; }
 }
 
 /* ============================================================
-   10. LOCALSTORAGE - Load & Save cài đặt
+   10. LOCALSTORAGE
    ============================================================ */
 function loadSettings() {
-  // API Key (giải mã atob)
   const savedKey = localStorage.getItem(LS.key);
-  if (savedKey) {
-    try { $('api-key').value = atob(savedKey); } catch (e) {}
-  }
-  // Các cài đặt khác
-  const stt = localStorage.getItem(LS.stt);
-  if (stt) $('stt-model').value = stt;
-
-  const trans = localStorage.getItem(LS.trans);
-  if (trans) $('trans-model').value = trans;
-
-  const chunk = localStorage.getItem(LS.chunk);
-  if (chunk) { $('chunk-duration').value = chunk; $('chunk-val').textContent = chunk; }
-
-  const autoread = localStorage.getItem(LS.autoread);
-  if (autoread) $('auto-read').checked = (autoread === 'true');
-
-  const rate = localStorage.getItem(LS.rate);
-  if (rate) { $('tts-rate').value = rate; $('rate-val').textContent = parseFloat(rate).toFixed(1); }
-
-  const pitch = localStorage.getItem(LS.pitch);
-  if (pitch) { $('tts-pitch').value = pitch; $('pitch-val').textContent = parseFloat(pitch).toFixed(1); }
+  if (savedKey) { try { $('api-key').value = atob(savedKey); } catch (e) {} }
+  const stt = localStorage.getItem(LS.stt); if (stt) $('stt-model').value = stt;
+  const trans = localStorage.getItem(LS.trans); if (trans) $('trans-model').value = trans;
+  const chunk = localStorage.getItem(LS.chunk); if (chunk) { $('chunk-duration').value = chunk; $('chunk-val').textContent = chunk; }
+  const autoread = localStorage.getItem(LS.autoread); if (autoread) $('auto-read').checked = (autoread === 'true');
+  const rate = localStorage.getItem(LS.rate); if (rate) { $('tts-rate').value = rate; $('rate-val').textContent = parseFloat(rate).toFixed(1); }
+  const pitch = localStorage.getItem(LS.pitch); if (pitch) { $('tts-pitch').value = pitch; $('pitch-val').textContent = parseFloat(pitch).toFixed(1); }
 }
 
 /* ============================================================
    11. GẮN SỰ KIỆN & KHỞI TẠO
    ============================================================ */
 function init() {
-  // --- Toggle Settings Panel ---
   $('settings-toggle').addEventListener('click', () => {
     $('settings-body').classList.toggle('collapsed');
     $('chevron').classList.toggle('open');
   });
 
-  // --- Toggle hiện/ẩn API Key ---
   $('toggle-key').addEventListener('click', () => {
     const input = $('api-key');
     input.type = input.type === 'password' ? 'text' : 'password';
   });
 
-  // --- Test Key ---
   $('test-key').addEventListener('click', testKey);
-  // Lưu key khi rời khỏi ô input
   $('api-key').addEventListener('blur', saveKey);
 
-  // --- Lưu cài đặt khi thay đổi ---
-  $('stt-model').addEventListener('change', () =>
-    localStorage.setItem(LS.stt, $('stt-model').value));
-  $('trans-model').addEventListener('change', () =>
-    localStorage.setItem(LS.trans, $('trans-model').value));
-  $('auto-read').addEventListener('change', () =>
-    localStorage.setItem(LS.autoread, $('auto-read').checked));
+  $('stt-model').addEventListener('change', () => localStorage.setItem(LS.stt, $('stt-model').value));
+  $('trans-model').addEventListener('change', () => localStorage.setItem(LS.trans, $('trans-model').value));
+  $('auto-read').addEventListener('change', () => localStorage.setItem(LS.autoread, $('auto-read').checked));
 
-  // --- Chunk duration slider ---
-  $('chunk-duration').addEventListener('input', (e) => {
-    $('chunk-val').textContent = e.target.value;
-    localStorage.setItem(LS.chunk, e.target.value);
-  });
+  $('chunk-duration').addEventListener('input', (e) => { $('chunk-val').textContent = e.target.value; localStorage.setItem(LS.chunk, e.target.value); });
+  $('tts-rate').addEventListener('input', (e) => { $('rate-val').textContent = parseFloat(e.target.value).toFixed(1); localStorage.setItem(LS.rate, e.target.value); });
+  $('tts-pitch').addEventListener('input', (e) => { $('pitch-val').textContent = parseFloat(e.target.value).toFixed(1); localStorage.setItem(LS.pitch, e.target.value); });
 
-  // --- TTS Rate slider ---
-  $('tts-rate').addEventListener('input', (e) => {
-    $('rate-val').textContent = parseFloat(e.target.value).toFixed(1);
-    localStorage.setItem(LS.rate, e.target.value);
-  });
-
-  // --- TTS Pitch slider ---
-  $('tts-pitch').addEventListener('input', (e) => {
-    $('pitch-val').textContent = parseFloat(e.target.value).toFixed(1);
-    localStorage.setItem(LS.pitch, e.target.value);
-  });
-
-  // --- Mode Selector ---
   document.querySelectorAll('.mode-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
@@ -1231,40 +827,25 @@ function init() {
     });
   });
 
-  // --- Nút Micro ---
-  $('mic-btn').addEventListener('click', () => {
-    if (isRecording) stopRecording();
-    else startRecording();
-  });
+  $('mic-btn').addEventListener('click', () => { if (isRecording) stopRecording(); else startRecording(); });
 
-  // --- Copy / Clear buttons ---
-  document.querySelectorAll('[data-copy]').forEach(b =>
-    b.addEventListener('click', () => copyPanel(b.dataset.copy)));
-  document.querySelectorAll('[data-clear]').forEach(b =>
-    b.addEventListener('click', () => clearPanel(b.dataset.clear)));
+  document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => copyPanel(b.dataset.copy)));
+  document.querySelectorAll('[data-clear]').forEach(b => b.addEventListener('click', () => clearPanel(b.dataset.clear)));
 
-  // --- TTS Controls ---
   $('tts-stop').addEventListener('click', () => window.speechSynthesis.cancel());
   $('tts-readall').addEventListener('click', readAllTranslation);
 
-  // --- Load voices (Web Speech API) ---
   loadVoices();
-  // onvoiceschanged: trình duyệt load giọng bất đồng bộ
-  if (typeof window.speechSynthesis !== 'undefined') {
-    window.speechSynthesis.onvoiceschanged = loadVoices;
-  }
+  if (typeof window.speechSynthesis !== 'undefined') window.speechSynthesis.onvoiceschanged = loadVoices;
 
-  // --- Load cài đặt & khởi tạo giao diện ---
   loadSettings();
   updateVoiceDropdownVisibility();
 
-  // Kiểm tra hỗ trợ trình duyệt
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    showToast('⚠️ Trình duyệt không hỗ trợ ghi âm. Dùng Chrome/Edge.', 'warn');
+    showToast('⚠️ Trình duyệt không hỗ trợ ghi âm. Dùng Chrome/Edge & HTTPS.', 'warn');
   }
 }
 
-// Chạy khi DOM sẵn sàng
 document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
